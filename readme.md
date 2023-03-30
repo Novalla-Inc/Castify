@@ -14,10 +14,10 @@ Contributing to Speak can be done in multiple ways.
 
 The current stack of Speak is what we are calling the "TTRR" stack.
 
-[Tauri](https://tauri.app/)
-[Typescript](https://www.typescriptlang.org/docs/)
-[Rust](https://doc.rust-lang.org/beta/)
-[React](https://react.dev/)
+- [Tauri](https://tauri.app/)
+- [Typescript](https://www.typescriptlang.org/docs/)
+- [Rust](https://doc.rust-lang.org/beta/)
+- [React](https://react.dev/)
 
 We also use RSPC to call the Typescript frontend for more of a Typesafe connection between the two.
 
