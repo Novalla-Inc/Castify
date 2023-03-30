@@ -34,19 +34,6 @@ fn router() -> Router {
             })
         })
         .query("getMe", |t| t(|ctx: AuthenticatedCtx, _: ()| ctx.user))
-        .mutation("createUser", |t| t(|ctx, new_user: User| async move {
-            await new_user.create()
-        }))
-        .subscription("pings", |t| {
-            t(|ctx, input: ()| {
-                async_stream: stream! {
-                    for i in 0..5 {
-                        yield "ping".to_string();
-                        sleep(Duration::from_secs(1)).await;
-                    }
-                }
-            })
-        })
         .build();
 
     return router;
@@ -55,6 +42,9 @@ fn router() -> Router {
 #[tokio::main]
 async fn main() {
     let r = router();
+
+    prisma_client_rust_cli::run();
+
     // Use your router like you normally would.
 }
 
