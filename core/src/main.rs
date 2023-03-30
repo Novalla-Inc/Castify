@@ -1,18 +1,12 @@
-use core::router;
+mod prisma;
 
-fn test_ffmpeg() {
-
-}
+use prisma::PrismaClient;
+use prisma::user;
+use prisma_client_rust::NewClientError;
 
 #[tokio::main]
 async fn main() {
-    // Use your router like you normally would.
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test_rspc_router() {
-        super::router();
-    }
+	let client: Result<PrismaClient, NewClientError> = PrismaClient::_builder().build().await;
+	let user: user::Data = user::Data{id: 1, name: "Deondre".to_string()};
+	print!("{} {}", user, 1)
 }
