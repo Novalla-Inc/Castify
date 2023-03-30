@@ -3,18 +3,34 @@
 
 use rspc::Router;
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
+
+fn router( ) -> Router {
+	let router = <Router>::new()
+    .query("version", |t| {
+			t(|_ctx, _input: ()|env!("CARGO_PKG_VERSION"))
+		})
+	.build();
+
+	return router;
+}
+
 #[tokio::main]
 async fn main() {
-    let router = <Router>::new().build().into();
-
     tauri::Builder::default()
-        .plugin(rspc::integrations::tauri::plugin(router, || ()))
+        .plugin(rspc::integrations::tauri::plugin(router().into(), || ()))
         .invoke_handler(tauri::generate_handler![greet])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+#[cfg(test)]
+mod tests {
+	#[test]
+	fn test_rspc_router() {
+		super::router();
+	}
 }
