@@ -20,8 +20,8 @@
 		},
 		"bundle": {
 			"active": true,
-			"icon": ["./icons/icon.icns"],
-			"identifier": "com.tauri.dev",
+			"icon": ["./icons/logo.icns"],
+			"identifier": "com.mumble.dev",
 			"targets": "all"
 		},
 		"security": {

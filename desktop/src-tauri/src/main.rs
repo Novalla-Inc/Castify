@@ -1,8 +1,9 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod data;
+use data::{save_data, Data};
 use rspc::Router;
-
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -21,6 +22,7 @@ fn router( ) -> Router {
 
 #[tokio::main]
 async fn main() {
+		save_data(Data{ id: "1".to_string(), email: "test@nil.comp".to_string(), stream_token: "test".to_string()}).expect("test");
     tauri::Builder::default()
         .plugin(rspc::integrations::tauri::plugin(router().into(), || ()))
         .invoke_handler(tauri::generate_handler![greet])
