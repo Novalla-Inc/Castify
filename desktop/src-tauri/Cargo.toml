@@ -17,6 +17,7 @@ tauri = { version = "1.2", features = ["shell-open"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9.19"
+bincode = "1.3.3"
 rspc = { version = "0.1.3", features = ["tauri"] }
 tokio = { version = "1.27.0", features = ["full"] }
 

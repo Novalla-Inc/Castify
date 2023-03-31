@@ -3,7 +3,6 @@
 
 mod data;
 use rspc::Router;
-use data::Data;
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)

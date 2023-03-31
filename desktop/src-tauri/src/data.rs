@@ -1,14 +1,30 @@
 use serde::{Deserialize, Serialize};
 use serde_yaml::{self};
+use bincode;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Data {
-	pub id: String,
+	pub id: i8,
 	pub email: String,
 	pub stream_token: String,
 }
 
+struct EncryptedData<T>{
+	id: i8,
+	email: T,
+	stream_token: T,
+}
+
+
+fn encypt_data(data: Data) {
+
+	let new_data = EncryptedData { id: data.id, email: bincode::serialize(&data.email), stream_token: bincode::serialize(&data.stream_token) };
+
+	println!("{:?}", new_data.email);
+}
+
 pub fn save_data(data: Data) -> Result<(), serde_yaml::Error> {
+
 	// Global filename
 	let filename = "local_config.yml";
 	// Old File Config
@@ -22,5 +38,24 @@ pub fn save_data(data: Data) -> Result<(), serde_yaml::Error> {
 
 	serde_yaml::to_writer(new_config_file, &data).unwrap();
 
+	encypt_data(data);
+
 	Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	#[test]
+	fn test_save_data() {
+		let data = Data {
+			id: 1,
+			email: "Test".to_string(),
+			stream_token: "Test".to_string(),
+		};
+
+		save_data(data).unwrap();
+	}
+}
+
