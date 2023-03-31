@@ -8,8 +8,6 @@ pub struct Data {
 	pub stream_token: String,
 }
 
-
-
 pub fn save_data(data: Data) -> Result<(), serde_yaml::Error> {
 	// Global filename
 	let filename = "local_config.yml";
