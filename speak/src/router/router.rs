@@ -1,6 +1,6 @@
 use std::sync::Arc;
 use rspc::Router;
-use crate::data::{data::{save_data, SaveData}};
+use crate::data::{data::{save_data, SaveData, ProjectData, save_project_data}};
 
 pub fn router() -> Arc<Router> {
     let core_router = <Router>::new()
@@ -16,6 +16,15 @@ pub fn router() -> Arc<Router> {
 						let filepath = input[4].to_string();
 
 						save_data(data_to_save, filepath).unwrap();
+				}))
+        .mutation("createProject", |t| t(|_ctx, input: Vec<String>| {
+						let data_to_save: ProjectData = ProjectData {
+							name: input[0].to_string(),
+						};
+
+						let projectname = input[1].to_string();
+
+						save_project_data(data_to_save, projectname).unwrap();
 				}))
         .build()
         .arced();
