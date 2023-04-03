@@ -1,6 +1,10 @@
 {
 	"name": "desktop",
 	"private": true,
+	"license": "APACHE-2.0",
+	"author": {
+		"name": "Mumble Inc."
+	},
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {

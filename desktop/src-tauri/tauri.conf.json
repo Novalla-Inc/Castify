@@ -18,9 +18,10 @@
 				"open": true
 			}
 		},
+		"macOSPrivateApi": true,
 		"bundle": {
 			"active": true,
-			"icon": ["./icons/logo.icns"],
+			"icon": ["./icons/speak-icon.icns"],
 			"identifier": "com.mumble.dev",
 			"targets": "all"
 		},
@@ -34,10 +35,16 @@
 			{
 				"fullscreen": false,
 				"resizable": true,
+				"alwaysOnTop": false,
+				"center": false,
+				"focus": false,
+				"transparent": true,
+				"decorations": true,
 				"title": "Speak",
-				"width": 800,
+				"minHeight": 600,
 				"height": 600,
-				"alwaysOnTop": false
+				"minWidth": 800,
+				"width": 800
 			}
 		]
 	}
