@@ -5,3 +5,12 @@ export type SaveData = {
 	audio_path: string;
 	file_path: string;
 };
+
+export type SceneData = {
+	sceneName: string;
+	scenePath: string;
+	node_locations: {
+		x: number;
+		y: number;
+	};
+};
