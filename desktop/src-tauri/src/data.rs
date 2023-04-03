@@ -9,18 +9,18 @@ pub struct Data {
 	pub stream_token: String,
 }
 
-struct EncryptedData<T>{
+struct EncryptedData {
 	id: i8,
-	email: T,
-	stream_token: T,
+	email: Result<Vec<u8>, bincode::Error>,
+	stream_token: Result<Vec<u8>, bincode::Error>,
 }
 
 
-fn encypt_data(data: Data) {
+fn encypt_data(data: Data) -> EncryptedData {
 
 	let new_data = EncryptedData { id: data.id, email: bincode::serialize(&data.email), stream_token: bincode::serialize(&data.stream_token) };
 
-	println!("{:?}", new_data.email);
+	return new_data;
 }
 
 pub fn save_data(data: Data) -> Result<(), serde_yaml::Error> {
@@ -36,9 +36,8 @@ pub fn save_data(data: Data) -> Result<(), serde_yaml::Error> {
     .open(filename)
     .expect("couldn't create file.");
 
-	serde_yaml::to_writer(new_config_file, &data).unwrap();
 
-	encypt_data(data);
+	serde_yaml::to_writer(new_config_file, &data).unwrap();
 
 	Ok(())
 }
