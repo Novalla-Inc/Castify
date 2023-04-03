@@ -6,11 +6,23 @@ export type SaveData = {
 	file_path: string;
 };
 
+export enum SceneType {
+	Live,
+	Preview,
+	Template,
+}
+
+type SceneSettings = {
+	recording: boolean;
+};
+
+export type ProjectData = {
+	project_name: string;
+	scene_data: SceneData;
+};
+
 export type SceneData = {
-	sceneName: string;
-	scenePath: string;
-	node_locations: {
-		x: number;
-		y: number;
-	};
+	scene_name: string;
+	scene_type: SceneType;
+	scene_settings: SceneSettings | null;
 };
