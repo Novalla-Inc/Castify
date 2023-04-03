@@ -1,52 +1,43 @@
-use std::fs;
-
-use prisma_client_rust::prisma_errors::Error;
+use serde_yaml;
 use serde::{Serialize, Deserialize};
 
-use serde_yaml;
-
-
 #[derive(Serialize, Deserialize, Debug)]
-struct SaveData {
+pub struct SaveData {
 	// save data
-	name: String,
-	stream_key: String,
-	video_save_path: String,
-	audio_save_path: String,
+	pub name: String,
+	pub stream_key: String,
+	pub video_save_path: String,
+	pub audio_save_path: String,
 }
 
-fn save_data(data: SaveData) -> Result<(), serde_yaml::Error> {
-	let filename = "template.yml";
-	let _path = std::fs::remove_file(filename).expect("could not delete!");
+pub fn save_data(data: SaveData, filename: String) -> Result<(), serde_yaml::Error> {
+	// check if file exists
+	if std::fs::metadata(filename.clone()).is_ok() {
+		let _path = std::fs::remove_file(filename.clone()).expect("could not delete!");
 
-	let new_config = std::fs::OpenOptions::new()
-    .write(true)
-    .create(true)
-    .open(filename)
-    .expect("could not create file.");
+		let new_config = std::fs::OpenOptions::new()
+			.write(true)
+			.create(true)
+			.open(filename)
+			.expect("could not create file.");
 
-	serde_yaml::to_writer(new_config, &data).unwrap();
+		serde_yaml::to_writer(new_config, &data).unwrap();
+		// if it is not there, create it
+	} else {
+		let original_config = std::fs::OpenOptions::new()
+			.write(true)
+			.create(true)
+			.open(filename)
+			.expect("could not create file.");
+
+		serde_yaml::to_writer(original_config, &data).unwrap();
+	}
 
 	Ok(())
 }
 
-fn load_data() {
+pub fn load_data() {
 
-	//
-
-}
-
-fn check_save_file(filepath: String) -> bool {
-	let save_file = filepath;
-
-	let save_file_contents = fs::read_to_string(save_file).expect("Unable to read file");
-
-	if save_file_contents != "" {
-		// println!("{}", save_file_contents);
-		return true;
-	}
-
-	return false;
 }
 
 #[cfg(test)]
@@ -62,12 +53,9 @@ mod tests {
 			audio_save_path: "test".to_string(),
 		};
 
-		let data = save_data(data).unwrap();
-		assert_eq!(data, ())
-	}
+		let filepath = "test.yml".to_string();
 
-	#[test]
-	fn test_check_save_file() {
-		assert_eq!(check_save_file("template.yml".to_string()), true);
+		let data = save_data(data, filepath).unwrap();
+		assert_eq!(data, ())
 	}
 }

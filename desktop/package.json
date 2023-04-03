@@ -16,7 +16,6 @@
 		"@emotion/react": "^11.10.6",
 		"@emotion/styled": "^11.10.6",
 		"@rspc/client": "^0.1.3",
-		"@rspc/react": "^0.1.3",
 		"@rspc/tauri": "^0.1.3",
 		"@tanstack/react-query": "^4.28.0",
 		"@tauri-apps/api": "^1.2.0",
