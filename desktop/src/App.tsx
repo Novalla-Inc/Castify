@@ -1,10 +1,10 @@
 import ContentDrawer from './components/ContentDrawer/ContentDrawer';
-import { NewProjectBtn } from './components/Project/NewProjectBtn';
+import OpenProjectBtn from './components/Project/OpenProjectBtn';
 
 export default function App() {
 	return (
 		<div className="flex flex-col">
-			<NewProjectBtn />
+			<OpenProjectBtn />
 			<span className="text-red-400">Test</span>
 			<ContentDrawer />
 		</div>
