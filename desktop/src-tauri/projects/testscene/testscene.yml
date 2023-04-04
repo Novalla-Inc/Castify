@@ -1,6 +1,0 @@
-project_name: testproject
-scene_data:
-  scene_name: testscene
-  scene_type: Live
-  scene_settings:
-    recording: true

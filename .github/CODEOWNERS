@@ -1,0 +1,7 @@
+*.rs @deondreE
+
+*.tsx @deondreE
+
+*.ts @deondreE
+
+/scripts/ @deondreE
