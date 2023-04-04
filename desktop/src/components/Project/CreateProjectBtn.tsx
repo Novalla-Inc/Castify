@@ -5,6 +5,7 @@ type DataProps = {
 	project_name: string;
 	streaming_location?: string;
 	scene_name: string;
+	onClick?: () => void;
 };
 
 function CreateProjectBtn({ ...props }: DataProps) {
@@ -30,6 +31,7 @@ function CreateProjectBtn({ ...props }: DataProps) {
 	return (
 		<button
 			onClick={handleClick}
+			type="button"
 			className="w-32 h-12 bg-teal-400 border-teal-400 rounded-md shadow-lg hover::bg-teal-300 hover:text-white"
 		>
 			Create Project

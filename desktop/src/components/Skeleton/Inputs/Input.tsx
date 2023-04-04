@@ -16,7 +16,12 @@ type InputProps = {
 function Input({ ...props }: InputProps) {
 	return (
 		<div className="p-4 w-auto h-auto">
-			<input className="" type={props.type} placeholder={props.placeholder} />
+			<input
+				className=""
+				onChange={props.onChange}
+				type={props.type}
+				placeholder={props.placeholder}
+			/>
 		</div>
 	);
 }

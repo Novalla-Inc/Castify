@@ -31,7 +31,7 @@ pub fn router() -> Arc<Router> {
                     scene_data: SceneData {
                         scene_name: input[1].to_string(),
                         scene_type: SceneType::Live,
-                        scene_settings: SceneSettings { recording: true },
+                        scene_settings: SceneSettings { recording: false },
                     },
                 };
 
