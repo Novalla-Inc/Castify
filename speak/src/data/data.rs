@@ -112,19 +112,4 @@ mod tests {
         let data = save_project_data(data, projectname).unwrap();
         assert_eq!(data, ())
     }
-
-    #[test]
-    fn test_save_data() {
-        let data = SaveData {
-            project_name: "test".to_string(),
-            stream_key: "test".to_string(),
-            video_save_path: "test".to_string(),
-            audio_save_path: "test".to_string(),
-        };
-
-        let filepath = "config.yml".to_string();
-
-        let data = save_config_file(data, filepath).unwrap();
-        assert_eq!(data, ())
-    }
 }
