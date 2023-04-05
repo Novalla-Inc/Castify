@@ -22,6 +22,8 @@ If you feel the need to add some script or action, Great! Create that script or 
 
 ## Rust Rant
 
+---
+
 Everything for the most part is written in the wonderful powerful programming language RUST.
 
 But just like every production project we have to follow [Style Guides](https://www.techtarget.com/searchsoftwarequality/feature/Follow-Googles-lead-with-programming-style-guides#:~:text=A%20style%20guide%20tells%20a,and%20bad%20programming%20behavior%20explicit.)
@@ -31,6 +33,8 @@ Rust has it's own style guide it makes you follow by default, the others where a
 Here is the Rust [Style Guide](https://rust-lang.github.io/api-guidelines/naming.html) For Reference.
 
 ### C++ / C Rant
+
+---
 
 There is some use of C++ especially for the linux connections for capturing those windows and building.
 
@@ -44,6 +48,8 @@ Follow the [Style Guide](https://google.github.io/styleguide/cppguide.html)
 Follow this [Style Guide](https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide/) for C.
 
 ### Swift / Objective-C Rant
+
+---
 
 Swift is found in the project for very MAC specific calls for things that cannot be done in C++
 
