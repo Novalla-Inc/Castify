@@ -4188,6 +4188,7 @@ dependencies = [
 name = "speak"
 version = "0.1.0"
 dependencies = [
+ "cc",
  "chrono",
  "ffmpeg-next",
  "prisma-client-rust",
