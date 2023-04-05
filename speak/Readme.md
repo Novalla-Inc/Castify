@@ -43,7 +43,7 @@ A few requirements for this project if you work in the C++ portion.
 - Everything is hosted in the `speak_streming` namespace.
 - The project is built with CMake.
 
-Follow the [Style Guide](https://google.github.io/styleguide/cppguide.html)
+Follow the [Style Guide](https://google.github.io/styleguide/cppguide.html) for C++.
 
 Follow this [Style Guide](https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide/) for C.
 
