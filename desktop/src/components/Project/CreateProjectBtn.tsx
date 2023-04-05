@@ -1,4 +1,4 @@
-import client from '../../client';
+import CLIENT from '../../client';
 import { ProjectData, SceneType } from '../../types/data';
 
 type DataProps = {
@@ -23,7 +23,7 @@ function CreateProjectBtn({ ...props }: DataProps) {
 
 		const data_to_use = [data.project_name, data.scene_data.scene_name];
 
-		client.mutation(['createProject', data_to_use]).then((res) => {
+		CLIENT.mutation(['createProject', data_to_use]).then((res) => {
 			console.log(res);
 		});
 	};

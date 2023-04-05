@@ -24,6 +24,7 @@ single_quote = true
 [.py]
 indent_style = space
 indent_size = 4
+max_line_length = 80
 
 [.rs]
 indent_style = tab
