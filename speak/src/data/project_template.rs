@@ -8,9 +8,9 @@ pub enum ProjectTemplateDefault {
 		stream_location: String,
 	},
 	SceneFolder {
-			project_folder_name: String,
-			image_folder_name: bool,
-			audio_folder_name: bool,
-			video_folder_name: bool,
-		}
+		project_folder_name: String,
+		image_folder_name: bool,
+		audio_folder_name: bool,
+		video_folder_name: bool,
+	},
 }

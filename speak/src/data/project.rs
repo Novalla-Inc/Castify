@@ -1,4 +1,3 @@
-
 use crate::data::project_template::ProjectTemplateDefault;
 use serde_json;
 
@@ -35,7 +34,10 @@ pub fn create_project_template() -> String {
 	create_template_folder();
 
 	let _cwd = std::env::current_dir().unwrap();
-	let _template_file_path = format!("{}/projects/templates/template.json", _cwd.to_string_lossy());
+	let _template_file_path = format!(
+		"{}/projects/templates/template.json",
+		_cwd.to_string_lossy()
+	);
 
 	if std::fs::metadata(_template_file_path.clone()).is_ok() {
 		// delete the file
@@ -43,10 +45,10 @@ pub fn create_project_template() -> String {
 	} else {
 		// write a new file
 		let new_config = std::fs::OpenOptions::new()
-            .write(true)
-            .create(true)
-            .open(_template_file_path.clone())
-            .expect("could not create file.");
+			.write(true)
+			.create(true)
+			.open(_template_file_path.clone())
+			.expect("could not create file.");
 
 		serde_json::to_writer_pretty(new_config, &_data).unwrap();
 	}
