@@ -20,3 +20,9 @@ Check the current open issues, then make sure to mark that you are doing it by l
 ## Step 3
 
 Submit pr and wait to be reviwed.
+
+Make sure to review the style guide for the `/desktop` folder.
+
+here is that style guide for Typescript files: [Style Guide](https://google.github.io/styleguide/tsguide.html)
+
+here is the style guide for TSX files: [Style Guide](https://airbnb.io/javascript/react/)
