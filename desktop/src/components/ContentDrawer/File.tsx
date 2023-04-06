@@ -26,7 +26,7 @@ export default function File({ ...props }: FileProps) {
 
 	return (
 		<div className="w-auto h-auto rounded-md text-center flex flex-col">
-			<div>
+			<div className="p-1 w-auto h-auto">
 				{/* Depends on the fileType */}
 				{(() => {
 					switch (props.fileType) {
@@ -58,7 +58,7 @@ export default function File({ ...props }: FileProps) {
 					}
 				})()}
 			</div>
-			<span className="file-text p-1">{props.name}</span>
+			<span className="file-text">{props.name}</span>
 		</div>
 	);
 }

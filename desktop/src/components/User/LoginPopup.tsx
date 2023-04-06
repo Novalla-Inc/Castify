@@ -16,7 +16,7 @@ function LoginPopup() {
 		<div>
 			{open ? (
 				// See: https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
-				<Full className="bg-[#000000CC] fixed">
+				<Full className="bg-[#000000CC] fixed top-0 left-0">
 					<div className="flex flex-col p-12">
 						<span className="text-center border-none text-4xl text-white">
 							Connect
@@ -61,7 +61,7 @@ function LoginPopup() {
 			) : (
 				<Button
 					text="Connect"
-					className="bg-stone-500 text-white"
+					className=" bg-[#5024] p-2 border-[#5024] rounded-md"
 					onClick={() => {
 						SetOpen(!open);
 					}}

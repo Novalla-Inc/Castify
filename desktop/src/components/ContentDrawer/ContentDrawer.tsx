@@ -38,12 +38,10 @@ function ContentDrawer() {
 		<div>
 			{open && (
 				<div>
-					<div className="w-full h-64 fixed bottom-0 bg-black overflow-scroll">
-						<div>
-							<span className="text-white text-4xl p-6">Content Drawer</span>
-						</div>
-						<div className="flex flex-col align-middle justfity-center relative right-0 p-4">
-							<div className="flex flex-row p-2">
+					<div className="w-full h-32 fixed bottom-0 bg-black">
+						{/* <span className="text-white text-2xl">Content Drawer</span> */}
+						<div className="flex flex-col justfity-center p-1">
+							<div className="flex flex-row">
 								{data.map((file, key) => {
 									// @ts-ignore
 									switch (file.file_type) {
