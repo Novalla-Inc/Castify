@@ -428,7 +428,7 @@ dependencies = [
  "base64 0.13.1",
  "bitvec",
  "chrono",
- "hex",
+ "hex 0.4.3",
  "indexmap",
  "js-sys",
  "lazy_static",
@@ -584,6 +584,24 @@ dependencies = [
  "either",
  "memchr",
  "unreachable",
+]
+
+[[package]]
+name = "commoncrypto"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d056a8586ba25a1e4d61cb090900e495952c7886786fc55f909ab2f819b69007"
+dependencies = [
+ "commoncrypto-sys",
+]
+
+[[package]]
+name = "commoncrypto-sys"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1fed34f46747aa73dfaa578069fd8279d2818ade2b55f38f22a9401c7f4083e2"
+dependencies = [
+ "libc",
 ]
 
 [[package]]
@@ -743,6 +761,18 @@ checksum = "1bfb12502f3fc46cca1bb51ac28df9d618d813cdc3d2f25b9fe775a34af26bb3"
 dependencies = [
  "generic-array",
  "typenum",
+]
+
+[[package]]
+name = "crypto-hash"
+version = "0.3.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8a77162240fd97248d19a564a565eb563a3f592b386e4136fb300909e67dddca"
+dependencies = [
+ "commoncrypto",
+ "hex 0.3.2",
+ "openssl",
+ "winapi",
 ]
 
 [[package]]
@@ -1558,6 +1588,12 @@ checksum = "fed44880c466736ef9a5c5b5facefb5ed0785676d0c02d612db14e54f0d84286"
 
 [[package]]
 name = "hex"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "805026a5d0141ffc30abb3be3173848ad46a1b1664fe632428479619a3644d77"
+
+[[package]]
+name = "hex"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
@@ -2309,7 +2345,7 @@ dependencies = [
  "futures-executor",
  "futures-io",
  "futures-util",
- "hex",
+ "hex 0.4.3",
  "hmac",
  "lazy_static",
  "md-5",
@@ -3260,7 +3296,7 @@ dependencies = [
  "connection-string",
  "either",
  "futures",
- "hex",
+ "hex 0.4.3",
  "libsqlite3-sys",
  "lru-cache",
  "metrics 0.18.1",
@@ -4190,6 +4226,7 @@ version = "0.1.0"
 dependencies = [
  "cc",
  "chrono",
+ "crypto-hash",
  "ffmpeg-next",
  "prisma-client-rust",
  "prisma-client-rust-cli",

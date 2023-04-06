@@ -1,4 +1,6 @@
 use super::scene;
+use crate::crypto::encrypt::create_hash_value;
+use crate::util::stream::generate_stream_key;
 use serde::{de::Error, Deserialize, Serialize};
 use serde_yaml;
 
@@ -48,6 +50,17 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 			.open(project_file)
 			.expect("could not create file.");
 
+		let config_data: SaveData = {
+			SaveData {
+				project_name: "test".to_string(),
+				stream_key: generate_stream_key(),
+				video_save_path: "/test".to_string(),
+				audio_save_path: "/test".to_string(),
+			}
+		};
+
+		save_config_file(config_data, "config.yml".to_string()).unwrap();
+
 		// write data to the file
 		serde_yaml::to_writer(original_config, &data).unwrap();
 	}
@@ -84,7 +97,14 @@ pub fn save_config_file(data: SaveData, filename: String) -> Result<(), serde_ya
 			.open(_path.clone())
 			.expect("could not create file.");
 
-		serde_yaml::to_writer(original_config, &data).unwrap();
+		let new_data: SaveData = SaveData {
+			project_name: data.project_name,
+			stream_key: create_hash_value(&data.stream_key),
+			video_save_path: create_hash_value(&data.video_save_path),
+			audio_save_path: create_hash_value(&data.audio_save_path),
+		};
+
+		serde_yaml::to_writer(original_config, &new_data).unwrap();
 	}
 
 	Ok(())
