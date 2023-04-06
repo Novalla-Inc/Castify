@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 
 import File, { FileTypes } from './File';
 
+import CLIENT from '../../client';
+
 function ContentDrawer() {
 	const [open, setOpen] = useState(false);
+	const [data, setData] = useState([]);
 
 	useEffect(() => {
 		const getKeyDown = (e: KeyboardEvent) => {
@@ -21,32 +24,51 @@ function ContentDrawer() {
 			// remove the event listeners
 			window.removeEventListener('keydown', getKeyDown);
 		};
-	}, [0]);
+	}, [10000]);
+
+	// get data from the project folder.
+	useEffect(() => {
+		CLIENT.query(['getContentDrawerData', 'Test']).then((res) => {
+			console.log(res);
+			setData(res);
+		});
+	}, [10000]);
 
 	return (
 		<div>
 			{open && (
 				<div>
-					<div className="w-full h-64 fixed bottom-0 bg-slate-500 overflow-scroll">
+					<div className="w-full h-64 fixed bottom-0 bg-black overflow-scroll">
 						<div>
-							<span className="text-green-950 text-4xl p-4">
-								Content Drawer
-							</span>
+							<span className="text-white text-4xl p-6">Content Drawer</span>
 						</div>
 						<div className="flex flex-col align-middle justfity-center relative right-0 p-4">
 							<div className="flex flex-row p-2">
-								<File name="test" fileType={FileTypes.AUDIO} />
-								<div className="p-4" />
-								<File name="test" fileType={FileTypes.AUDIO} />
-								<div className="p-4" />
-								<File name="test" fileType={FileTypes.AUDIO} />
-							</div>
-							<div className="flex flex-row p-2">
-								<File name="test" fileType={FileTypes.AUDIO} />
-								<div className="p-4" />
-								<File name="test" fileType={FileTypes.AUDIO} />
-								<div className="p-4" />
-								<File name="test" fileType={FileTypes.AUDIO} />
+								{data.map((file, key) => {
+									// @ts-ignore
+									switch (file.file_type) {
+										case 'NONE':
+											return (
+												<div key={key}>
+													<File
+														fileType={FileTypes.FOLDER}
+														// @ts-ignore
+														name={file.file_name}
+													/>
+												</div>
+											);
+										case 'YML':
+											return (
+												<div key={key}>
+													<File
+														fileType={FileTypes.CONFIG}
+														// @ts-ignore
+														name={file.file_name}
+													/>
+												</div>
+											);
+									}
+								})}
 							</div>
 						</div>
 					</div>

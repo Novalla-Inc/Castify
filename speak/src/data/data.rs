@@ -53,13 +53,12 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 			.open(project_file)
 			.expect("could not create file.");
 
-
 		let _data_project_name = data.project_name.clone();
 		let config_data: SaveData = SaveData {
-				project_name:	_data_project_name,
-				stream_key: generate_stream_key(),
-				video_save_path: "/videos".to_string(),
-				audio_save_path: "/audio".to_string(),
+			project_name: _data_project_name,
+			stream_key: generate_stream_key(),
+			video_save_path: "/videos".to_string(),
+			audio_save_path: "/audio".to_string(),
 		};
 
 		// Create the other folders for the project
@@ -68,8 +67,8 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 		// write data to the file
 		serde_yaml::to_writer(original_config, &data).unwrap();
 
-    // create user config
-    save_config_file(config_data, "config.yml".to_string()).unwrap();
+		// create user config
+		save_config_file(config_data, "config.yml".to_string()).unwrap();
 	}
 
 	Ok(())

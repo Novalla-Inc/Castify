@@ -45,12 +45,13 @@ pub fn router() -> Arc<Router> {
 		})
 		.query("getContentDrawerData", |t| {
 			t(|_ctx, input: String| {
-				let content_drawer = get_file_type(input);
+				let _cwd = std::env::current_dir();
+				let _path = format!("{}/projects/{}", _cwd.unwrap().display(), input);
+				let content_drawer = get_file_type(_path);
 
-				content_drawer
+				return content_drawer;
 			})
 		})
-
 		.build()
 		.arced();
 
