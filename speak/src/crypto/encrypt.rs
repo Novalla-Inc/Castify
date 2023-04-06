@@ -9,4 +9,6 @@ pub fn create_hash_value(value: &str) -> String {
 
 pub fn remove_hash_value(value: &str) -> String {
 	//  TODO: implement this
+
+	return "".to_string();
 }
