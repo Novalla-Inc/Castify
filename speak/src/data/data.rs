@@ -1,8 +1,9 @@
+use serde::{de::Error, Deserialize, Serialize};
+use serde_yaml;
+
 use super::scene;
 use crate::crypto::encrypt::create_hash_value;
 use crate::util::stream::generate_stream_key;
-use serde::{de::Error, Deserialize, Serialize};
-use serde_yaml;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SaveData {
@@ -13,13 +14,15 @@ pub struct SaveData {
 	pub audio_save_path: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ProjectData {
 	// project data
 	pub project_name: String,
 	pub scene_data: scene::SceneData,
 }
 
+// Create the project directory and the specific .yml files for the project.
+// This creates the scene data and the config data.
 pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), serde_yaml::Error> {
 	// create project directory
 	let project_dir = format!("projects/{}", projectname);
@@ -50,16 +53,23 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 			.open(project_file)
 			.expect("could not create file.");
 
+
+		let _data_project_name = data.project_name.clone();
 		let config_data: SaveData = {
 			SaveData {
-				project_name: "test".to_string(),
+				project_name:	_data_project_name,
 				stream_key: generate_stream_key(),
 				video_save_path: "/test".to_string(),
 				audio_save_path: "/test".to_string(),
 			}
 		};
 
+		// Create the config file with the correct config data:
+		// also encrypts the important data relative to the user.
 		save_config_file(config_data, "config.yml".to_string()).unwrap();
+
+		// Create the other folders for the project
+		create_project_structure(project_dir);
 
 		// write data to the file
 		serde_yaml::to_writer(original_config, &data).unwrap();
@@ -68,7 +78,29 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 	Ok(())
 }
 
-// Specific to config files
+// Create the other folders for the project
+fn create_project_structure(project_path: String) {
+	// create new directorie paths.
+	let _create_video_path = format!("{}/{}", project_path, "vidoes");
+	let _create_audio_path = format!("{}/{}", project_path, "audio");
+	let _create_images_path = format!("{}/{}", project_path, "images");
+
+	// check if the directory exists
+	if std::fs::metadata(_create_video_path.clone()).is_ok() {
+		// if the  directory exists, delete it
+		std::fs::remove_dir_all(_create_video_path.clone()).expect("could not delete!");
+		std::fs::remove_dir_all(_create_audio_path.clone()).expect("could not delete!");
+		std::fs::remove_dir_all(_create_images_path.clone()).expect("could not delete!");
+	} else {
+		// create all directories if they do not exist
+		std::fs::create_dir(_create_video_path).expect("could not create directory");
+		std::fs::create_dir(_create_audio_path).expect("could not create directory");
+		std::fs::create_dir(_create_images_path).expect("could not create directory");
+	}
+}
+
+// Create the config file with the correct config data:
+// also encrypts the important data relative to the user.
 pub fn save_config_file(data: SaveData, filename: String) -> Result<(), serde_yaml::Error> {
 	// check if file exists
 	let _cwd = std::env::current_dir().unwrap();

@@ -7,8 +7,8 @@ pub fn create_hash_value(value: &str) -> String {
 	return new_value;
 }
 
-pub fn remove_hash_value(value: &str) -> String {
+pub fn remove_hash_value(value: String) -> String {
 	//  TODO: implement this
 
-	return "".to_string();
+	return value;
 }
