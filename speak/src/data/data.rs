@@ -55,24 +55,21 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 
 
 		let _data_project_name = data.project_name.clone();
-		let config_data: SaveData = {
-			SaveData {
+		let config_data: SaveData = SaveData {
 				project_name:	_data_project_name,
 				stream_key: generate_stream_key(),
-				video_save_path: "/test".to_string(),
-				audio_save_path: "/test".to_string(),
-			}
+				video_save_path: "/videos".to_string(),
+				audio_save_path: "/audio".to_string(),
 		};
-
-		// Create the config file with the correct config data:
-		// also encrypts the important data relative to the user.
-		save_config_file(config_data, "config.yml".to_string()).unwrap();
 
 		// Create the other folders for the project
 		create_project_structure(project_dir);
 
 		// write data to the file
 		serde_yaml::to_writer(original_config, &data).unwrap();
+
+    // create user config
+    save_config_file(config_data, "config.yml".to_string()).unwrap();
 	}
 
 	Ok(())
@@ -81,7 +78,7 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 // Create the other folders for the project
 fn create_project_structure(project_path: String) {
 	// create new directorie paths.
-	let _create_video_path = format!("{}/{}", project_path, "vidoes");
+	let _create_video_path = format!("{}/{}", project_path, "videos");
 	let _create_audio_path = format!("{}/{}", project_path, "audio");
 	let _create_images_path = format!("{}/{}", project_path, "images");
 
@@ -111,6 +108,8 @@ pub fn save_config_file(data: SaveData, filename: String) -> Result<(), serde_ya
 		filename
 	);
 
+	println!("path: {}", _path);
+
 	if std::fs::metadata(_path.clone()).is_ok() {
 		std::fs::remove_file(_path.clone()).expect("could not delete!");
 
@@ -126,7 +125,7 @@ pub fn save_config_file(data: SaveData, filename: String) -> Result<(), serde_ya
 		let original_config = std::fs::OpenOptions::new()
 			.write(true)
 			.create(true)
-			.open(_path.clone())
+			.open(_path)
 			.expect("could not create file.");
 
 		let new_data: SaveData = SaveData {
