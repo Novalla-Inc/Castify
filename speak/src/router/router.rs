@@ -2,6 +2,9 @@ use crate::data::{
 	data::{save_config_file, save_project_data, ProjectData, SaveData},
 	scene::{SceneData, SceneSettings, SceneType},
 };
+
+use crate::data::thumbnail::get_file_type;
+
 use rspc::Router;
 use std::sync::Arc;
 
@@ -40,6 +43,14 @@ pub fn router() -> Arc<Router> {
 				save_project_data(data_to_save, projectname).unwrap();
 			})
 		})
+		.query("getContentDrawerData", |t| {
+			t(|_ctx, input: String| {
+				let content_drawer = get_file_type(input);
+
+				content_drawer
+			})
+		})
+
 		.build()
 		.arced();
 
