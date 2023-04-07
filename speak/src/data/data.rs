@@ -5,7 +5,7 @@ use super::scene;
 use crate::crypto::encrypt::create_hash_value;
 use crate::util::stream::generate_stream_key;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct SaveData {
 	// save data
 	pub project_name: String,
