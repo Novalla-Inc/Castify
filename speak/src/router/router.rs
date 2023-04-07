@@ -4,6 +4,7 @@ use crate::data::{
 };
 
 use crate::data::thumbnail::get_file_type;
+use crate::util::stream::generate_stream_key;
 
 use rspc::Router;
 use std::sync::Arc;
@@ -50,6 +51,13 @@ pub fn router() -> Arc<Router> {
 				let content_drawer = get_file_type(_path);
 
 				return content_drawer;
+			})
+		})
+		.query("getStreamKey", |t| {
+			t(|_ctx, input: ()| {
+				let _stream_key = generate_stream_key();
+
+				return _stream_key;
 			})
 		})
 		.build()

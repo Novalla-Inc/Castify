@@ -9,9 +9,9 @@ pub fn create_hash_value(value: &str) -> String {
 	return new_value;
 }
 
+/// Remove the hash from the value
 pub fn remove_hash_value(value: String) -> String {
-	//  TODO: implement this
-
+	// TODO: Implement this.
 	return value;
 }
 
