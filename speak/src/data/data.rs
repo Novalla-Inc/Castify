@@ -21,15 +21,13 @@ pub struct ProjectData {
 	pub scene_data: scene::SceneData,
 }
 
-// Create the project directory and the specific .yml files for the project.
-// This creates the scene data and the config data.
+/// Create the project directory and the specific .yml files for the project.
+/// This creates the scene data and the config data.
 pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), serde_yaml::Error> {
 	// create project directory
 	let project_dir = format!("projects/{}", projectname);
 
-	println!("project dir: {}", project_dir);
-
-	// check for /projexts directory
+	// check for /projects directory
 	if std::fs::metadata("projects").is_ok() {
 		println!("directory already exists");
 	} else {
@@ -74,7 +72,7 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 	Ok(())
 }
 
-// Create the other folders for the project
+/// Create the other folders for the project
 fn create_project_structure(project_path: String) {
 	// create new directorie paths.
 	let _create_video_path = format!("{}/{}", project_path, "videos");

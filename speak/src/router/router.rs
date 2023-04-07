@@ -3,11 +3,12 @@ use crate::data::{
 	scene::{SceneData, SceneSettings, SceneType},
 };
 
+use crate::crypto::encrypt::return_config_data;
 use crate::data::thumbnail::get_file_type;
 use crate::util::stream::generate_stream_key;
 
 use rspc::Router;
-use std::sync::Arc;
+use std::{sync::Arc};
 
 pub fn router() -> Arc<Router> {
 	let core_router = <Router>::new()
@@ -54,10 +55,17 @@ pub fn router() -> Arc<Router> {
 			})
 		})
 		.query("getStreamKey", |t| {
-			t(|_ctx, input: ()| {
+			t(|_ctx, _input: ()| {
 				let _stream_key = generate_stream_key();
 
 				return _stream_key;
+			})
+		})
+		.query("getConfigData", |t| {
+			t(|_ctx, input: Vec<String>| {
+				let _result = return_config_data(input[0].to_string(), input[1].to_string());
+
+				return _result;
 			})
 		})
 		.build()
