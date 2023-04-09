@@ -2,7 +2,7 @@
 
 ![Screenshot 2023-03-30 at 22 23 17](https://user-images.githubusercontent.com/67658523/229019607-30193303-e7b6-4e55-830b-9636940b482c.png)
 
-Speak allows you to create content through a simple plug and play user-interface.
+Speak is a Streaming Application for the future making everything simple to Record, Stream, and Upload, all from one interface.
 
 ### Contributing
 
