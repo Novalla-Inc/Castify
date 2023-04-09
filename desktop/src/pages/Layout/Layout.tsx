@@ -1,11 +1,11 @@
 import SideNav from '../../components/Nav/SideNav';
-import PreviewScene from '../../components/Scene/PreviewScene';
+import Scene from '../../components/Scene/Scene';
 
 function SceneLayout() {
 	return (
 		<div>
 			<div className="fixed left-40">
-				<PreviewScene />
+				<Scene />
 			</div>
 			<SideNav />
 		</div>
