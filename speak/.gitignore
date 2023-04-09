@@ -4,3 +4,6 @@
 .
 # user settings
 .idea
+
+# typescript export
+bindings.ts
