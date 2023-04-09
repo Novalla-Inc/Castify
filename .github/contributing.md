@@ -8,8 +8,8 @@ Understanding the structure of the project:
 
 The structure of speak is simple as a whole:
 
-    - `speak` -> This is the core backend written in rust, everything is connected to the frontend through [rspc](https://www.rspc.dev/)
-    - `desktop` -> everything relating to the frontend of the project.
+- `speak` -> This is the core backend written in rust, everything is connected to the frontend through [rspc](https://www.rspc.dev/)
+- `desktop` -> everything relating to the frontend of the project.
 
 ## Step 1
 
@@ -37,11 +37,12 @@ Check the current open issues, then make sure to mark that you are doing it by l
 Once you have chosen you issue leave a comment that you are doing that issue, then create a new branch and get to work.
 
 Overall the branch layout of the project is simple:
-    - release -> for the QA tested release version of Speak.
-    - dev-main -> for the dev branch.
-    - `your_branch_name` -> for you feature or branch you are working on.
 
-** README issues will be accepted, but if your PR is just readme fixed we will not merge it **
+- release -> for the QA tested release version of Speak.
+- dev-main -> for the dev branch.
+- `your_branch_name` -> for you feature or branch you are working on.
+
+* README issues will be accepted, but if your PR is just readme fixed we will not merge it *
 
 ## Step 3
 
