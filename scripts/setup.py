@@ -35,11 +35,19 @@ def check_os():
         print("Unknown OS")
         return "unknown"
 
+def setup_pnpm(os_var):
+    if os_var is "windows":
+        os.system("npm i -g pnpm")
+    elif os_var is "macos":
+        os.system("sudo npm i -g pnpm")
 
-# get rust
-def get_rust():
+### Setup Rustc and Pnpm
+def setup_environment():
     # Get the rust compiler from the rust website
     os_var = check_os()
+    # Get pnpm setup
+    setup_pnpm(os_var)
+    # Rust up environment variable
     rustup = os.path.join(os.environ["HOME"], ".cargo", "bin", "rustup")
 
     match os_var:
@@ -55,4 +63,4 @@ def get_rust():
 
 
 startup()
-get_rust()
+setup_environment()
