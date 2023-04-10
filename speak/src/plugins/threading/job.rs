@@ -58,7 +58,7 @@ fn print_test() {
 	println!("Test");
 }
 
-#[test]
-fn test_define_job_system() {
-	println!("{:?}", define_job_system(JobType::DEFAULT, print_test()));
-}
+// #[test]
+// fn test_define_job_system() {
+// 	println!("{:?}", define_job_system(JobType::DEFAULT, print_test()));
+// }

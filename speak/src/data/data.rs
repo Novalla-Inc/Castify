@@ -5,6 +5,8 @@ use super::scene;
 use crate::crypto::encrypt::create_hash_value;
 use crate::util::stream::generate_stream_key;
 
+use crate::data::scene::SceneCore;
+
 use crate::data::scene_node::{Node, NodeType};
 
 use uuid::Uuid;
@@ -192,11 +194,15 @@ mod tests {
 
 	#[test]
 	fn test_save_project_data() {
+		let mut v: Vec<Uuid> = Vec::new();
+		v.push(Uuid::new_v4());
+
 		let data = ProjectData {
 			project_name: "test".to_string(),
 			scene_data: scene::SceneData {
 				scene_name: "test".to_string(),
 				scene_type: scene::SceneType::Live,
+				scene_core: SceneCore { contents: v },
 				scene_settings: scene::SceneSettings { recording: true },
 			},
 		};
