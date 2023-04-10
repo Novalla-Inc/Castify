@@ -21,7 +21,7 @@ pub fn remove_hash_value(value: String) -> String {
 /// Return the config data in a json format.
 pub fn return_config_data(config_name: String, project_name: String) -> String {
 	let _cwd = std::env::current_dir();
-	let _cwd1 = std::env::current_dir();
+
 	let _config_path = format!(
 		"{}/projects/{}/{}",
 		_cwd.unwrap().to_string_lossy(),
@@ -38,8 +38,8 @@ pub fn return_config_data(config_name: String, project_name: String) -> String {
 	return _return_data;
 }
 
-/// Return porject data as json
-pub fn return_project_data(project_name: String) -> String {
+/// Return project data as json
+pub fn return_project_data(project_name: String) -> serde_json::Value {
 	let _cwd = std::env::current_dir();
 	// project .yml file
 	let _project_path = format!(
@@ -53,14 +53,7 @@ pub fn return_project_data(project_name: String) -> String {
 
 	let _data: ProjectData = serde_yaml::from_reader(_config_file).unwrap();
 
-	let _return_data = serde_json::to_string_pretty(&_data).unwrap();
-
-	return _return_data;
-}
-
-#[test]
-fn test_return_project_data() {
-	assert!(return_project_data("test").len() != 0);
+	return serde_json::to_value(_data).unwrap();
 }
 
 #[test]
