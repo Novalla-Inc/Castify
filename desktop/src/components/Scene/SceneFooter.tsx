@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CLIENT from "../../client";
+
 
 function SceneFooter() {
     const [data, setData] = useState([]);
 
-    useEffect(() => {
-        let fetch_data = ["Test"];
+    const handleClick = async () => {
+        let _args: any = ["793dff68-1185-444d-81c4-1ec934faa2c6", "Test"];
 
-        CLIENT.query(["getProjectData", fetch_data]).then((res) => {
+        await CLIENT.query(["scenegetNodeById", _args]).then((res) => {
+            console.log(res);
             setData(res);
         });
-
-        console.log(data);
-    }, [10000]);
-
-    const handleClick = () => {
-        let test_data = "Test";
-
-        CLIENT.query(["sceneGetNodeIds", test_data]).then((res) => console.log(res));
     }
 
     return (
@@ -26,14 +20,16 @@ function SceneFooter() {
                 {/* TODO: Context Menu */}
                 <div className='w-full h-full flex flex-row text-2xl justify-center'>
                     <div className='w-96 h-96 flex flex-col'>
-                        <span>Contents</span>
-                        {/* @ts-ignore */}
-                        {/* <div>{JSON.stringify(data.scene_data.scene_core.contents, null, 4)}</div> */}
+                        <span className='text-3xl p-1'>Contents</span>
+                        <div>
+                            {/* @ts-ignore */}
+                            {JSON.stringify(data.node_type, null, 2)}
+                        </div>
                     </div>
                     <div className='w-96 h-96 flex flex-col'>
-                        <span>Mixer</span>
-                        <button onClick={handleClick}>
-                            Test all IDS
+                        <span className='text-3xl p-1'>Mixer</span>
+                        <button className='bg-yellow-300 p-2 text-2xl text-black w-24 h-12 border rounded-md active:shadow-md active:bg-red-300 hover:underline' onClick={handleClick}>
+                            Test
                         </button>
                     </div>
                 </div>

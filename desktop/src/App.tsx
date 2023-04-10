@@ -9,10 +9,10 @@ export default function App() {
 				<div className="flex flex-col">
 					<OpenProjectBtn />
 					<span className="text-red-400">Test</span>
-				</div>
+			</div>
 			</div>
 			<SideNav />
-			{/* <ContentDrawer /> */}
+			<ContentDrawer />
 		</div>
 	);
 }

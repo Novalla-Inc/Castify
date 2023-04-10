@@ -18,18 +18,15 @@ pub fn create_scene_router() -> RouterBuilder {
 				};
 
 				// TODO: Add Node
-				// add_node(_data, input[1].to_string())})
 			})
 		})
 		.query("getNodeById", |t| {
-			t(|_ctx, _input: Uuid| {
-				let _node_uuid: Uuid = _input;
-
+			t(|_ctx, _input: Vec<String>| {
 				// Get node by id
-				let node_result: Node = get_node(_node_uuid);
+				let node_result = get_node(_input[0].to_string(), _input[1].to_string());
 
-				// return json data
-				return serde_json::to_string_pretty(&node_result).unwrap();
+				// 	// return json data
+				return node_result;
 			})
 		})
 		.query("GetNodeIds", |t| {
