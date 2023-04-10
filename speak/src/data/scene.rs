@@ -37,3 +37,5 @@ pub struct SceneCore {
 	// Array of uuids
 	pub contents: Vec<Uuid>,
 }
+
+// TODO: add_node to the contents list.
