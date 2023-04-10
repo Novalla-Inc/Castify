@@ -4,8 +4,10 @@ export type Procedures = {
     queries: 
         { key: "getConfigData", input: string[], result: string } | 
         { key: "getContentDrawerData", input: string, result: any } | 
-        { key: "getProjectData", input: string[], result: string } | 
+        { key: "getProjectData", input: string[], result: any } | 
         { key: "getStreamKey", input: never, result: string } | 
+        { key: "sceneGetNodeIds", input: string, result: string[] } | 
+        { key: "scenegetNodeById", input: string, result: string } | 
         { key: "sceneversion", input: never, result: string } | 
         { key: "version", input: never, result: string },
     mutations: 

@@ -12,7 +12,7 @@ export default function App() {
 				</div>
 			</div>
 			<SideNav />
-			<ContentDrawer />
+			{/* <ContentDrawer /> */}
 		</div>
 	);
 }
