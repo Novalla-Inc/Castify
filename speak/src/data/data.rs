@@ -3,6 +3,7 @@ use serde_yaml;
 
 use super::scene;
 use crate::crypto::encrypt::create_hash_value;
+use crate::data::template::node_template;
 use crate::util::stream::generate_stream_key;
 
 use crate::data::scene::SceneCore;
@@ -167,6 +168,14 @@ pub fn create_node_data(project_name: String, filename: String, nodes: Vec<Node>
 		filename
 	);
 
+	// file path for all of the node templates that user can choose from.
+	let node_template_data = format!(
+		"{}/projects/{}/data/{}",
+		_cwd.to_string_lossy(),
+		project_name,
+		"node_tempaltes.json"
+	);
+
 	if std::fs::metadata(node_data_path.clone()).is_ok() {
 		std::fs::remove_file(node_data_path.clone()).expect("could not delete!");
 
@@ -184,6 +193,17 @@ pub fn create_node_data(project_name: String, filename: String, nodes: Vec<Node>
 			.open(node_data_path)
 			.expect("could not create file.");
 
+		// create the node template data.
+		let template_data = node_template::create_template_nodes();
+		let template_file = std::fs::OpenOptions::new()
+			.write(true)
+			.create(true)
+			.open(node_template_data)
+			.expect("could not create file.");
+
+		// write the template data to json.
+		serde_json::to_writer_pretty(template_file, &template_data).unwrap();
+		// write the scene node data to .yml.
 		serde_yaml::to_writer(new_node_data, &nodes).unwrap();
 	}
 }

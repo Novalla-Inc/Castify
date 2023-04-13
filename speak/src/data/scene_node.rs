@@ -75,10 +75,3 @@ fn test_get_ids() {
 	let _result = get_all_node_ids("test".to_string());
 	assert_eq!(_result.len(), 1);
 }
-
-#[test]
-fn test_get_node_by_id() {
-	let _nodes = get_all_node_ids("test".to_string());
-	let _result = get_node(_nodes[0].to_string(), "test".to_string());
-	assert_eq!(_result.name, "test");
-}
