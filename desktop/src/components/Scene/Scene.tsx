@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
+
+import './scene.scss';
 import CLIENT from '../../client';
 import SceneFooter from './SceneFooter';
-import { useState, useEffect } from 'react';
 
 type CanvasProps = {
 	width?: number | null;
@@ -69,7 +71,7 @@ function SceneContainer() {
 	return (
 		// TODO: Add a interface for the types of the returned data from rspc.
 		// TODO: W / H calculation
-		<div className="w-[32rem] h-96 border border-black rounded-lg p-2 justify-center align-middle relative left-8">
+		<div className="w-[40rem] h-[28rem] border border-black rounded-lg p-2 justify-center align-middle relative left-[9.5rem] scene_core shadow-md">
 			<Node
 				size={size}
 				// @ts-ignore
