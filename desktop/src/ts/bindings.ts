@@ -7,12 +7,13 @@ export type Procedures = {
         { key: "getProjectData", input: string[], result: any } | 
         { key: "getStreamKey", input: never, result: string } | 
         { key: "sceneGetNodeIds", input: string, result: string[] } | 
+        { key: "sceneGetNodeTemplateData", input: never, result: any } | 
         { key: "scenegetNodeById", input: string[], result: any } | 
         { key: "sceneversion", input: never, result: string } | 
         { key: "version", input: never, result: string },
     mutations: 
         { key: "createProject", input: string[], result: null } | 
         { key: "saveData", input: string[], result: null } | 
-        { key: "scenecreateNode", input: string[], result: null },
+        { key: "sceneCreateNode", input: string[], result: string },
     subscriptions: never
 };

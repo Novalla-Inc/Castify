@@ -173,7 +173,7 @@ pub fn create_node_data(project_name: String, filename: String, nodes: Vec<Node>
 		"{}/projects/{}/data/{}",
 		_cwd.to_string_lossy(),
 		project_name,
-		"node_tempaltes.json"
+		"node_templates.json"
 	);
 
 	if std::fs::metadata(node_data_path.clone()).is_ok() {

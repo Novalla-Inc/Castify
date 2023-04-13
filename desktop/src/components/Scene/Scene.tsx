@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import './scene.scss';
 import CLIENT from '../../client';
 import SceneFooter from './SceneFooter';
+import { AddNodeScreen } from './AddNodeScreen';
 
 type CanvasProps = {
 	width?: number | null;
@@ -59,7 +60,7 @@ function SceneContainer() {
 	const [size, setSize] = useState({ x: 0, y: 0 });
 
 	useEffect(() => {
-		let _args: any = ['793dff68-1185-444d-81c4-1ec934faa2c6', 'Test'];
+		let _args: any = ['793dff68-1185-444d-81c4-1ec934faa2c6', 'test'];
 
 		CLIENT.query(['scenegetNodeById', _args]).then((res) => {
 			setData(res);
@@ -91,6 +92,7 @@ function SceneContainer() {
 function Scene() {
 	return (
 		<div className="w-full h-full">
+			<AddNodeScreen />
 			<div className="p-4">
 				{/* Scene Cotainer */}
 				<SceneContainer />

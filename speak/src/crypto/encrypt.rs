@@ -3,6 +3,7 @@ use crypto_hash::{hex_digest, Algorithm};
 use serde_json;
 
 use crate::data::data::{ProjectData, SaveData};
+use crate::data::template::node_template::BaseNode;
 
 /// Convert the value into a hash value -> sha256
 pub fn create_hash_value(value: &str) -> String {
@@ -36,6 +37,25 @@ pub fn return_config_data(config_name: String, project_name: String) -> String {
 	let _return_data = serde_json::to_string_pretty(&_data).unwrap();
 
 	return _return_data;
+}
+
+/// return the node template data.
+pub fn get_node_template_data(filename: String, project_name: String) -> serde_json::Value {
+	let _cwd = std::env::current_dir();
+
+	let _template_path = format!(
+		"{}/projects/{}/data/{}",
+		_cwd.unwrap().to_string_lossy(),
+		project_name,
+		filename
+	);
+
+	let _template_file = std::fs::File::open(_template_path).unwrap();
+
+	// template node vector.
+	let _data: Vec<BaseNode> = serde_yaml::from_reader(_template_file).unwrap();
+
+	return serde_json::to_value(_data).unwrap();
 }
 
 /// Return project data as json

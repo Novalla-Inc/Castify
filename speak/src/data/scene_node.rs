@@ -15,6 +15,41 @@ pub struct Node {
 	pub node_type: NodeType,
 }
 
+pub fn add_node(project_name: String, new_node: Node) -> String {
+	let _cwd = std::env::current_dir().unwrap();
+	let _nodes_scene_write = format!(
+		"{}/projects/{}/data/nodes.yml",
+		_cwd.to_string_lossy(),
+		project_name
+	);
+
+	let _nodes_scene_read = format!(
+		"{}/projects/{}/data/nodes.yml",
+		_cwd.to_string_lossy(),
+		project_name
+	);
+
+	let data_file_reader = std::fs::File::open(_nodes_scene_read).unwrap();
+
+	let mut _old_data: Vec<Node> = serde_yaml::from_reader(data_file_reader).unwrap();
+
+	let data_file = std::fs::OpenOptions::new()
+		.write(true)
+		.create(true)
+		.open(_nodes_scene_write)
+		.expect("could not create file.");
+
+	let mut _new_data: Vec<Node> = Vec::new();
+
+	// add new node data.
+	_new_data.push(new_node);
+	_new_data.append(&mut _old_data);
+
+	_ = serde_yaml::to_writer(data_file, &_new_data).unwrap();
+
+	return "Success".to_string();
+}
+
 /// Get node by uuid.
 pub fn get_node(id: String, project_name: String) -> serde_json::Value {
 	let _cwd = std::env::current_dir().unwrap();
@@ -64,8 +99,6 @@ pub fn get_all_node_ids(project_name: String) -> Vec<Uuid> {
 	for _data in _data {
 		_result_vec.push(_data.id);
 	}
-
-	println!("{:?}", _result_vec);
 
 	return _result_vec;
 }
