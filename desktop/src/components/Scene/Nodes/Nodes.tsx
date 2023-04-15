@@ -37,6 +37,7 @@ const CameraNodeTemplate = styled(Node)<{ color: string }>`
     color: ${props => props.color || 'black'}
 `;
 
+/** Camera Node for the scene Render */
 function CameraNode ({ ...props }: NodeProps) {
     return (
         <CameraNodeTemplate color={''}>
@@ -46,6 +47,7 @@ function CameraNode ({ ...props }: NodeProps) {
     )
 } 
 
+/** Chat Node for the scene Render  */
 function ChatNode ({ ...props }: NodeProps) {
     return (
         <ChatNodeTemplate color={''}>
