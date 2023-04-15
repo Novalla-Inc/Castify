@@ -33,6 +33,7 @@ serde_yaml = "0.9.19"
 uuid = { version="1.1.2", features=["serde", "v4"] }
 ffmpeg-next = { version="6.0.0", optional=true, features=[] }
 crypto-hash = "0.3.4"
+env_logger = "0.10.0"
 
 
 [build-dependencies]
