@@ -47,9 +47,9 @@
 				"decorations": true,
 				"title": "Speak",
 				"minHeight": 600,
-				"height": 600,
+				"height": 900,
 				"minWidth": 800,
-				"width": 800
+				"width": 1200
 			}
 		]
 	}

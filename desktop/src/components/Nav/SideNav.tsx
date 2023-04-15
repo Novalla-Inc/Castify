@@ -12,7 +12,7 @@ function SideNav() {
 				</button>
 			</div>
 			<div className="p-4 w-auto h-auto relative left-2">
-				<button className="bg-[#5024] p-2 border-[#5024] rounded-md w-20">
+				<button className="bg-[#5024] p-2 border-[#5024] rounded-md w-20 hover:cursor-pointer">
 					<Link to="/layout">layout</Link>
 				</button>
 			</div>
