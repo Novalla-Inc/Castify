@@ -1,3 +1,10 @@
+// Font import
+
+// See: https: //fonts.google.com/specimen/Roboto?query=roboto
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+$chat-font: 'Roboto', sans-serif;
+
 
 // Scene component
 .scene {
@@ -50,4 +57,8 @@
     .footer__content {
         background-color: #D9D9D9;
     }
+}
+
+.scene_chat {
+    font-family: $chat-font;
 }

@@ -66,6 +66,10 @@ function SceneContainer() {
 			setData(res);
 		});
 
+		CLIENT.query(['sceneGetNodeIds', '']).then((res) => {
+			console.log(res);
+		});
+
 		setSize({ x: 100, y: 100 });
 	}, [100]);
 
@@ -92,7 +96,7 @@ function SceneContainer() {
 function Scene() {
 	return (
 		<div className="w-full h-full">
-			<AddNodeScreen />
+			{/* <AddNodeScreen /> */}
 			<div className="p-4">
 				{/* Scene Cotainer */}
 				<SceneContainer />

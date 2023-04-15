@@ -4,6 +4,7 @@ import { motion, animate } from 'framer-motion';
 
 import './scene.scss';
 import CLIENT from '../../client';
+import Chat from './Bottom/Chat';
 
 function SceneFooter() {
 	const [data, setData] = useState([]);
@@ -60,6 +61,7 @@ function SceneFooter() {
 					<div className="p-4" />
 					<div className="w-[18rem] h-22 border rounded-md p-2 shadow-md footer__content">
 						<span className="text-2xl">Chat</span>
+						<Chat />
 					</div>
 					<div className="p-4" />
 					<div className="w-[15rem] h-22 border rounded-md p-2 shadow-md footer__content">
