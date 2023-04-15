@@ -1,3 +1,4 @@
+use crate::data::node::Node;
 use serde::{Deserialize, Serialize};
 
 // TODO: add node-graph implmentation
@@ -19,5 +20,6 @@ pub struct SceneSettings {
 pub struct SceneData {
 	pub scene_name: String,
 	pub scene_type: SceneType,
+	pub scene_nodes: Vec<Node>,
 	pub scene_settings: SceneSettings,
 }

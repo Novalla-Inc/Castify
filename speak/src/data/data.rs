@@ -3,6 +3,7 @@ use serde_yaml;
 
 use super::scene;
 use crate::crypto::encrypt::create_hash_value;
+use crate::data::node::{Node, NodeType};
 use crate::util::stream::generate_stream_key;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -142,15 +143,28 @@ pub fn load_data() {}
 
 #[cfg(test)]
 mod tests {
+	use crate::data::node::Position;
+
 	use super::*;
 
 	#[test]
 	fn test_save_project_data() {
+		let new_node: Node = Node {
+			id: uuid::Uuid::new_v4(),
+			name: "test".to_string(),
+			node_type: NodeType::VIDEO,
+			position: Position { x: 0, y: 0 },
+		};
+
+		let mut scene_nodes: Vec<Node> = Vec::new();
+		scene_nodes.push(new_node);
+
 		let data = ProjectData {
 			project_name: "test".to_string(),
 			scene_data: scene::SceneData {
 				scene_name: "test".to_string(),
 				scene_type: scene::SceneType::Live,
+				scene_nodes: scene_nodes,
 				scene_settings: scene::SceneSettings { recording: true },
 			},
 		};
