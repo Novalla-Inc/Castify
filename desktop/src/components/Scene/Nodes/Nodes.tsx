@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
 type NodeProps = {
-    name: string;
+    name?: string;
     color?: string;
+};
+
+interface TextNodeProps extends NodeProps {
+    text: string;
 };
 
 const Node = styled.div`
@@ -37,15 +41,32 @@ const CameraNodeTemplate = styled(Node)<{ color: string }>`
     color: ${props => props.color || 'black'}
 `;
 
+
+const TextNodeTemplate = styled(Node)<{ color: string }>`
+    background-color: red;
+    color: ${props => props.color || 'black'}
+`;
+
+
+
 /** Camera Node for the scene Render */
 function CameraNode ({ ...props }: NodeProps) {
     return (
         <CameraNodeTemplate color={''}>
             <NodeTitle>{props.name}</NodeTitle>
-            <NodeBody>Camera Node</NodeBody>
+            <NodeBody>Chat Node</NodeBody>
         </CameraNodeTemplate>
     )
 } 
+
+function TextNode ({ ...props }: TextNodeProps) {
+    return (
+        <TextNodeTemplate color={''}>
+            <NodeBody>{props.text}</NodeBody>
+        </TextNodeTemplate>
+    )
+} 
+
 
 /** Chat Node for the scene Render  */
 function ChatNode ({ ...props }: NodeProps) {
@@ -57,4 +78,4 @@ function ChatNode ({ ...props }: NodeProps) {
     )
 }
 
-export { ChatNode, CameraNode };
+export { ChatNode, CameraNode, TextNode };

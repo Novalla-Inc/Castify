@@ -1,3 +1,5 @@
+import CLIENT from '../../client';
+import CreateNode from './CreateNode';
 import { ChatNode, CameraNode } from './Nodes/Nodes';
 import { useEffect, useState } from 'react';
  
@@ -6,6 +8,8 @@ function SceneRender() {
     const [nodes, setNodes]: any = useState([]);
 
     useEffect(() => {
+
+        // let node_data = CLIENT.query(["sceneGetAllNodes", "test"]);
         let nodes = [
             {
                 id: 1,
@@ -47,6 +51,7 @@ function SceneRender() {
 function SceneView() {
     return (
         <div className='w-full h-full'>
+            <CreateNode />
             <SceneRender />
         </div>
     )
