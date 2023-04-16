@@ -82,6 +82,13 @@ pub fn get_all_nodes(project_path: String) -> Vec<Node> {
 	return node_vec;
 }
 
+pub fn return_all_nodes(project_name: String) -> serde_json::Value {
+	let _cwd = std::env::current_dir().unwrap();
+	let project_path = format!("{}/projects/{}/{}.yml", _cwd.to_string_lossy(), project_name.clone(), project_name.clone());
+
+	return serde_json::to_value(get_all_nodes(project_path)).unwrap();
+}
+
 #[test]
 fn test_get_all_nodes() {
 	let _cwd = std::env::current_dir().unwrap();
@@ -109,6 +116,13 @@ fn create_node_test() {
 	let c = get_all_nodes(project_path.clone());
 
 	let node_vec = create_node(new_node, c, project_path.clone(), "test".to_string());
+	
+	assert!(node_vec != "");
+}
+
+#[test]
+fn test_return_all_nodes() {
+	let node_vec = return_all_nodes("test".to_string());
 
 	println!("{:?}", node_vec);
 

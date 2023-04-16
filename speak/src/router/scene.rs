@@ -1,16 +1,16 @@
-use std::path::PathBuf;
 use uuid::Uuid;
 
-use crate::data::node::{create_node, get_all_nodes, Node, NodeType, Position};
+use crate::data::node::{create_node, get_all_nodes, Node, NodeType, Position, return_all_nodes};
 
 use rspc::RouterBuilder;
 
+/// Create the router that will handle all of the scene functionality.
 pub fn create_scene_router() -> RouterBuilder {
 	let scene_router = RouterBuilder::new()
 		.query("version", |t| {
 			t(|_ctx, _input: ()| env!("CARGO_PKG_VERSION"))
 		})
-		.query("CreateNode", |t| {
+		.mutation("CreateNode", |t| {
 			t(|_ctx, _input: Vec<String>| {
 				let _cwd = std::env::current_dir().unwrap();
 
@@ -36,6 +36,14 @@ pub fn create_scene_router() -> RouterBuilder {
 					create_node(new_node, cur_nodes, _path.clone(), _input[0].to_string());
 
 				return node_vec;
+			})
+		})
+		.query("GetAllNodes", |t| {
+			t(|_ctx, _input: String| {
+				// "PROJECT_NAME"
+				let node_data = return_all_nodes(_input);
+
+				return node_data;
 			})
 		});
 
