@@ -83,6 +83,9 @@ function CreateNode () {
             default:
                 break;
         }
+        
+        // Reload the page on creation of the node. 
+        location.reload();
     };
     
     return (

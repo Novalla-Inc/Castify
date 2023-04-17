@@ -12,6 +12,12 @@ pub fn fn_log_info(message: &str) {
 	}
 }
 
+pub fn log_info_object(message: &str) {
+	if log_enabled!(Level::Info) {
+		info!("{:?}", message);
+	}
+}
+
 /// Log a message at the debug level.
 pub fn fn_log_debug(message: &str) {
 	if log_enabled!(Level::Debug) {

@@ -2,7 +2,6 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::{data::project, router::scene};
-
 use super::data::ProjectData;
 use crate::data::scene::{SceneData, SceneSettings, SceneType};
 
@@ -96,6 +95,7 @@ fn test_get_all_nodes() {
 
 	let node_vec = get_all_nodes(project_path);
 
+	// TODO: Change to use logger.
 	println!("{:?}", node_vec);
 
 	assert!(node_vec.len() > 0);
