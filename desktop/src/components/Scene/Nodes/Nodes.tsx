@@ -3,12 +3,14 @@ import styled from 'styled-components';
 type NodeProps = {
     name?: string;
     color?: string;
+    ref?: any;
 };
 
 interface TextNodeProps extends NodeProps {
     text: string;
 };
 
+// Base Node  Template
 const Node = styled.div`
     width: 10rem;
     height: 10rem;
@@ -31,6 +33,8 @@ const NodeBody = styled.div`
     color: black;
 `;
 
+/// -------------- Templates for rendering the nodes -----------------
+
 const ChatNodeTemplate = styled(Node)<{ color: string }>`
     background-color: blue;
     color: ${props => props.color || 'black'}
@@ -41,37 +45,36 @@ const CameraNodeTemplate = styled(Node)<{ color: string }>`
     color: ${props => props.color || 'black'}
 `;
 
-
 const TextNodeTemplate = styled(Node)<{ color: string }>`
     background-color: red;
     color: ${props => props.color || 'black'}
 `;
 
-
+////  ---------------------------------------------------------------
 
 /** Camera Node for the scene Render */
 function CameraNode ({ ...props }: NodeProps) {
     return (
-        <CameraNodeTemplate color={''}>
+        <CameraNodeTemplate color={''} ref={props.ref}>
             <NodeTitle>{props.name}</NodeTitle>
             <NodeBody>Chat Node</NodeBody>
         </CameraNodeTemplate>
     )
 } 
 
+/** Text Node Takes in some text and renders it on the screen. */
 function TextNode ({ ...props }: TextNodeProps) {
     return (
-        <TextNodeTemplate color={''}>
+        <TextNodeTemplate color={''} ref={props.ref}>
             <NodeBody>{props.text}</NodeBody>
         </TextNodeTemplate>
     )
 } 
 
-
 /** Chat Node for the scene Render  */
 function ChatNode ({ ...props }: NodeProps) {
     return (
-        <ChatNodeTemplate color={''}>
+        <ChatNodeTemplate color={''} ref={props.ref}>
             <NodeTitle>{props.name}</NodeTitle>
             <NodeBody>Chat Node</NodeBody>
         </ChatNodeTemplate>
