@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import CLIENT from "../../client";
 
 const CreateNodeHeading = styled.span`
     font-size: 1.5rem;
@@ -36,6 +37,7 @@ const CoreTemplate = styled.button`
 
 function CreateNode () {
     const [active, setActive] = useState(false);
+    const [type, setType] = useState('');
 
     // TODO: move this to a universal hook so that it can be used in other components.
     useEffect(() => {
@@ -55,6 +57,33 @@ function CreateNode () {
 			window.removeEventListener('keydown', getKeyDown);
 		};
 	}, [10000]);
+
+    const requestCreateNode = (nodeName: string) => {
+        CLIENT.mutation(["sceneCreateNode", ["Test", `${nodeName}`]] ).then((res: any) => {
+            console.log(res);
+        });
+    };
+
+    // Handle the click of the create node btn then create the corrisponding node. 
+    const handleCreateNode = (type: string) => {
+        setType(type);
+
+        // Create the node of the given type.
+        switch(type) {
+            case 'CHAT':
+                console.log('CHAT');
+                requestCreateNode('ChatNode');
+                break;
+            case 'CAMERA':
+                console.log('CAMERA');
+                break;
+            case 'TEXT':
+                console.log('TEXT');
+                break;
+            default:
+                break;
+        }
+    };
     
     return (
         <div>
@@ -64,11 +93,11 @@ function CreateNode () {
                     <CreateNodeSubheading>pick a template source and change the setting to your needs.</CreateNodeSubheading>
                     <div className='p-2' />
                     <div className='flex flex-row w-auto h-auto'>
-                        <CoreTemplate>Chat Node</CoreTemplate>
+                        <CoreTemplate onClick={() => handleCreateNode('CHAT')}>Chat Node</CoreTemplate>
                         <Spacer />
-                        <CoreTemplate>Camera Node</CoreTemplate>
+                        <CoreTemplate onClick={() => handleCreateNode('CAMERA')}>Camera Node</CoreTemplate>
                         <Spacer />
-                        <CoreTemplate>Text Node</CoreTemplate>
+                        <CoreTemplate onClick={() => handleCreateNode('CAMERA')}>Text Node</CoreTemplate>
                     </div>
                 </div>
             )}

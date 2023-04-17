@@ -15,18 +15,20 @@ pub fn create_scene_router() -> RouterBuilder {
 				let _cwd = std::env::current_dir().unwrap();
 
 				let _path = format!(
-					"{}/projects/{}/{}/.yml",
+					"{}/projects/{}/{}.yml",
 					_cwd.to_string_lossy(),
 					_input[0].to_string(),
 					_input[0].to_string(),
 				);
+
+				println!("{:?}", _path);
 
 				// ["test", "{NODE_NAME}"]
 
 				let new_node = Node {
 					id: Uuid::new_v4(),
 					name: _input[1].to_string(),
-					node_type: NodeType::AUDIO,
+					node_type: NodeType::CHAT,
 					position: Position { x: 0, y: 0 },
 				};
 
