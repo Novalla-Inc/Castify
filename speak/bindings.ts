@@ -6,6 +6,7 @@ export type Procedures = {
         { key: "getContentDrawerData", input: string, result: any } | 
         { key: "getStreamKey", input: never, result: string } | 
         { key: "sceneGetAllNodes", input: string, result: any } | 
+        { key: "sceneGetNodeById", input: string[], result: any } | 
         { key: "sceneversion", input: never, result: string } | 
         { key: "version", input: never, result: string },
     mutations: 

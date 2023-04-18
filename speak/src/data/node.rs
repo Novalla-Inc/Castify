@@ -42,7 +42,7 @@ pub fn create_node(
 
 	current_nodes.push(node_data);
 
-	if (std::fs::metadata(project_path.clone()).is_ok()) {
+	if std::fs::metadata(project_path.clone()).is_ok() {
 		std::fs::remove_file(project_path.clone()).unwrap();
 
 		let new_config = std::fs::OpenOptions::new()
@@ -67,6 +67,7 @@ pub fn create_node(
 	return serde_json::to_value(current_nodes.clone()).unwrap();
 }
 
+/// Get all the nodes within the scene config file.
 pub fn get_all_nodes(project_path: String) -> Vec<Node> {
 	let mut node_vec: Vec<Node> = Vec::new();
 
@@ -81,11 +82,46 @@ pub fn get_all_nodes(project_path: String) -> Vec<Node> {
 	return node_vec;
 }
 
+/// return all the nodes in a json format --> Global Format
 pub fn return_all_nodes(project_name: String) -> serde_json::Value {
 	let _cwd = std::env::current_dir().unwrap();
 	let project_path = format!("{}/projects/{}/{}.yml", _cwd.to_string_lossy(), project_name.clone(), project_name.clone());
 
 	return serde_json::to_value(get_all_nodes(project_path)).unwrap();
+}
+
+/// return all node ids in a json format --> Global Format
+pub fn return_all_node_id(project_name: String) -> serde_json::Value {
+	let _cwd = std::env::current_dir().unwrap();
+	let project_path = format!("{}/projects/{}/{}.yml", _cwd.to_string_lossy(), project_name.clone(), project_name.clone());
+
+	let mut ids_return: Vec<Uuid> = Vec::new();
+
+	// Nodes inside the project file currently.
+	let data = get_all_nodes(project_path);
+
+	// Get each of the nodes ids.
+	for node in data {
+		ids_return.push(node.id);
+	}
+
+	return serde_json::to_value(ids_return).unwrap();
+}	
+
+/// Allows for Uuid input and returns the node that is corrisponding to the id. --> Global Format
+pub fn get_node_by_id(id: Result<Uuid, uuid::Error>, project_name: String) -> serde_json::Value {
+	let _cwd = std::env::current_dir().unwrap();
+	let project_path = format!("{}/projects/{}/{}.yml", _cwd.to_string_lossy(), project_name, project_name);
+	let nodes = get_all_nodes(project_path);
+
+	// Check the id of every-node
+	for node in nodes {
+		if node.id == id.clone().unwrap() {
+			return serde_json::to_value(node).unwrap();
+		}
+	}
+
+	return serde_json::to_value("").unwrap();
 }
 
 #[test]

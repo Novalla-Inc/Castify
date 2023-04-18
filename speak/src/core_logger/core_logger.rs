@@ -1,5 +1,7 @@
 use log::{debug, error, info, log_enabled, trace, warn, Level};
 
+// TODO: Fix logger.
+
 /// Initialize the logger.
 pub fn fn_init_logger() {
 	env_logger::init();

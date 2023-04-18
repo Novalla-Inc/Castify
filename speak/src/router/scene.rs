@@ -1,6 +1,6 @@
 use uuid::Uuid;
 
-use crate::data::node::{create_node, get_all_nodes, Node, NodeType, Position, return_all_nodes};
+use crate::data::node::{create_node, get_all_nodes, Node, NodeType, Position, return_all_nodes, get_node_by_id};
 
 use rspc::RouterBuilder;
 
@@ -47,6 +47,13 @@ pub fn create_scene_router() -> RouterBuilder {
 
 				return node_data;
 			})
+		})
+		.query("GetNodeById", |t| {
+			t(|_ctx,  _input: Vec<String>| {
+				// ["NODE_ID", "PROJECT_NAME"]
+				let id = uuid::Uuid::parse_str(&_input[0].to_string());
+				return get_node_by_id(id, _input[1].to_string());
+			}) 
 		});
 
 	return scene_router;
