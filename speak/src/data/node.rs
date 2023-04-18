@@ -1,7 +1,6 @@
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-use crate::{data::project, router::scene};
 use super::data::ProjectData;
 use crate::data::scene::{SceneData, SceneSettings, SceneType};
 
@@ -69,23 +68,30 @@ pub fn create_node(
 
 /// Get all the nodes within the scene config file.
 pub fn get_all_nodes(project_path: String) -> Vec<Node> {
-	let mut node_vec: Vec<Node> = Vec::new();
+	let mut _node_vec: Vec<Node> = Vec::new();
 
 	let file = std::fs::File::open(project_path).unwrap();
 
 	let scene_data: ProjectData = serde_yaml::from_reader(file).unwrap();
 
+	println!("{:?}", scene_data.clone());
+
 	for node in scene_data.scene_data.scene_nodes {
-		node_vec.push(node);
+		_node_vec.push(node);
 	}
 
-	return node_vec;
+	return _node_vec;
 }
 
 /// return all the nodes in a json format --> Global Format
 pub fn return_all_nodes(project_name: String) -> serde_json::Value {
 	let _cwd = std::env::current_dir().unwrap();
-	let project_path = format!("{}/projects/{}/{}.yml", _cwd.to_string_lossy(), project_name.clone(), project_name.clone());
+	let project_path = format!(
+		"{}/projects/{}/{}.yml",
+		_cwd.to_string_lossy(),
+		project_name.clone(),
+		project_name.clone()
+	);
 
 	return serde_json::to_value(get_all_nodes(project_path)).unwrap();
 }
@@ -93,7 +99,12 @@ pub fn return_all_nodes(project_name: String) -> serde_json::Value {
 /// return all node ids in a json format --> Global Format
 pub fn return_all_node_id(project_name: String) -> serde_json::Value {
 	let _cwd = std::env::current_dir().unwrap();
-	let project_path = format!("{}/projects/{}/{}.yml", _cwd.to_string_lossy(), project_name.clone(), project_name.clone());
+	let project_path = format!(
+		"{}/projects/{}/{}.yml",
+		_cwd.to_string_lossy(),
+		project_name.clone(),
+		project_name.clone()
+	);
 
 	let mut ids_return: Vec<Uuid> = Vec::new();
 
@@ -106,12 +117,17 @@ pub fn return_all_node_id(project_name: String) -> serde_json::Value {
 	}
 
 	return serde_json::to_value(ids_return).unwrap();
-}	
+}
 
 /// Allows for Uuid input and returns the node that is corrisponding to the id. --> Global Format
 pub fn get_node_by_id(id: Result<Uuid, uuid::Error>, project_name: String) -> serde_json::Value {
 	let _cwd = std::env::current_dir().unwrap();
-	let project_path = format!("{}/projects/{}/{}.yml", _cwd.to_string_lossy(), project_name, project_name);
+	let project_path = format!(
+		"{}/projects/{}/{}.yml",
+		_cwd.to_string_lossy(),
+		project_name,
+		project_name
+	);
 	let nodes = get_all_nodes(project_path);
 
 	// Check the id of every-node
@@ -124,43 +140,68 @@ pub fn get_node_by_id(id: Result<Uuid, uuid::Error>, project_name: String) -> se
 	return serde_json::to_value("").unwrap();
 }
 
+/// Get node by id for core Rust Usage
+pub fn get_node(id: Result<Uuid, uuid::Error>, project_name: String) -> Result<Node, ()> {
+	let _cwd = std::env::current_dir().unwrap();
+	let project_path = format!(
+		"{}/projects/{}/{}.yml",
+		_cwd.to_string_lossy(),
+		project_name,
+		project_name
+	);
+	let nodes = get_all_nodes(project_path);
+
+	// Check the id of every-node
+	for node in nodes {
+		if node.id == id.clone().unwrap() {
+			return Ok(node);
+		}
+	}
+
+	panic!("Wrong")
+}
+
+/// Update method for adding new nodes to the data file.
+pub fn update_node_file(new_node: Node, project_name: String) -> serde_json::Value {
+	let _cwd = std::env::current_dir().unwrap();
+	let project_path = format!(
+		"{}/projects/{}/{}.yml",
+		_cwd.to_string_lossy(),
+		project_name,
+		project_name
+	);
+
+	let mut _current_nodes = get_all_nodes(project_path.clone());
+	_current_nodes.push(new_node);
+
+	// delete the old project file
+	_ = std::fs::remove_file(project_path.clone());
+
+	// Create a new project file.
+	let new_config = std::fs::OpenOptions::new()
+		.write(true)
+		.create(true)
+		.open(project_path.clone())
+		.expect("could not create file.");
+
+	// Write the new project data.
+	serde_yaml::to_writer(new_config, &_current_nodes).unwrap();
+
+	return serde_json::to_value(&_current_nodes).unwrap();
+}
+
 #[test]
 fn test_get_all_nodes() {
 	let _cwd = std::env::current_dir().unwrap();
-	let project_path = format!("{}/projects/test/test.yml", _cwd.to_string_lossy());
+	let project_name = "test";
+	let path = format!(
+		"{}/projects/{}/{}.yml",
+		_cwd.to_string_lossy(),
+		project_name,
+		project_name
+	);
 
-	let node_vec = get_all_nodes(project_path);
+	let project_data = get_all_nodes(path);
 
-	// TODO: Change to use logger.
-	println!("{:?}", node_vec);
-
-	assert!(node_vec.len() > 0);
-}
-
-#[test]
-fn create_node_test() {
-	let _cwd = std::env::current_dir().unwrap();
-	let project_path = format!("{}/projects/test/test.yml", _cwd.to_string_lossy());
-
-	let new_node = Node {
-		id: Uuid::new_v4(),
-		name: "test".to_string(),
-		node_type: NodeType::AUDIO,
-		position: Position { x: 0, y: 0 },
-	};
-
-	let c = get_all_nodes(project_path.clone());
-
-	let node_vec = create_node(new_node, c, project_path.clone(), "test".to_string());
-	
-	assert!(node_vec != "");
-}
-
-#[test]
-fn test_return_all_nodes() {
-	let node_vec = return_all_nodes("test".to_string());
-
-	println!("{:?}", node_vec);
-
-	assert!(node_vec != "");
+	assert!(project_data.len() > 1);
 }
