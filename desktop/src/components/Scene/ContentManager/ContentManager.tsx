@@ -20,6 +20,19 @@ function NodeName({ name }: { name: string }) {
 
     const handleSave = () => {
         alert(`Are you sure about the name: ${returnName}`);
+
+        // Change the data after the user presses confirm
+        setTimeout(() => {
+            let req_data = {
+                project_name: "Test",
+                node_id: "6b21537e-b39d-483d-8f73-62320a2ea74e",
+                new_node_name: `${returnName}`
+            };
+    
+            CLIENT.mutation(["sceneUpdateNode", [req_data.project_name, req_data.node_id, req_data.new_node_name]]).then((res) => {
+                console.log(res);
+            });
+        }, 2000);
     }
 
     const handleOpenClick = ( ) => {
