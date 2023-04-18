@@ -1,6 +1,9 @@
 use uuid::Uuid;
 
-use crate::data::node::{create_node, get_all_nodes, Node, NodeType, Position, return_all_nodes, get_node_by_id};
+use crate::data::node::{
+	create_node, get_all_nodes, get_node, get_node_by_id, return_all_nodes, update_node_file, Node,
+	NodeType, Position,
+};
 
 use rspc::RouterBuilder;
 
@@ -40,6 +43,20 @@ pub fn create_scene_router() -> RouterBuilder {
 				return node_vec;
 			})
 		})
+		.mutation("UpdateNode", |t| {
+			t(|_ctx, _input: Vec<String>| {
+				// ["project_name", "NODE_ID", "NEW_NODE_NAME"]
+				let _node_id = uuid::Uuid::parse_str(&_input[1].to_string());
+				let mut _node = get_node(_node_id, _input[0].to_string()).unwrap();
+				// change the node name
+				_node.name = _input[2].to_string();
+
+				// Create the updated node file
+				let _updated_node = update_node_file(_node, _input[0].to_string());
+
+				return _updated_node;
+			})
+		})
 		.query("GetAllNodes", |t| {
 			t(|_ctx, _input: String| {
 				// "PROJECT_NAME"
@@ -49,11 +66,11 @@ pub fn create_scene_router() -> RouterBuilder {
 			})
 		})
 		.query("GetNodeById", |t| {
-			t(|_ctx,  _input: Vec<String>| {
+			t(|_ctx, _input: Vec<String>| {
 				// ["NODE_ID", "PROJECT_NAME"]
 				let id = uuid::Uuid::parse_str(&_input[0].to_string());
 				return get_node_by_id(id, _input[1].to_string());
-			}) 
+			})
 		});
 
 	return scene_router;
