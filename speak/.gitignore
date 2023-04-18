@@ -4,3 +4,6 @@
 .
 # user settings
 .idea
+
+# bidnings
+./bindings.ts
