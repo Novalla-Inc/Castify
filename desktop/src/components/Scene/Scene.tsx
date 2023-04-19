@@ -1,5 +1,4 @@
 import CLIENT from '../../client';
-import CreateNode from './CreateNode';
 import { ChatNode, CameraNode, TextNode } from './Nodes/Nodes';
 import { useEffect, useState } from 'react';
  
@@ -43,7 +42,6 @@ function SceneRender() {
 function SceneView() {
     return (
         <div className='w-full h-full'>
-            <CreateNode />
             <SceneRender />
         </div>
     )
