@@ -18,16 +18,27 @@ const Subheading = styled.span`
 // ________________ Node Source __________________________
 
 /** Node Source Default Container for each of the nodes */
-const NodeSource = styled.button``;
+const NodeSource = styled.button`
+    width: auto;
+    height: 4rem;
+`;
 
 /** Node Source Text */
-const NodeSourceText = styled.span``;
+const NodeSourceText = styled.span`
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+`;
 
 /** Node Source Icon */
-const NodeSoureIcon = styled.img``;
+const NodeSoureIcon = styled.img`
+    width: 2rem;
+    height: 2rem;
+`;
 
 /** Source Spacer */
-const NodeSourceSpacer = styled.div``;
+const NodeSourceSpacer = styled.div`
+    padding: 1rem;
+`;
 
 // _______________________________________________________
 
