@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CLIENT from "../../../client";
+import CreateNode from "../Nodes/CreateNode";
 
 type CManagerProps = {
     projectName?: string;
@@ -84,9 +85,17 @@ function NodeSpacer() {
     return <div className='p-0.5'></div>
 }
 
+/** Tooltip Component for hovering over-things */
+function Tooltip({ text }: { text: string }) {
+    return (
+        <div>{text}</div>
+    )
+}
+
 /** Allows the user to manage the cotent of a given scene. */
 function ContentManager({ ...props }: CManagerProps) {
     const [nodes, setNodes] = useState([]);
+    const [open, setOpen] = useState(true);
 
     // TODO: Store all nodes globally in local storage, then just get them
     // get all of the nodes.
@@ -106,19 +115,33 @@ function ContentManager({ ...props }: CManagerProps) {
         <div className='fixed bottom-[1rem] left-[11rem] border border-white rounded-md p-2 shadow-md w-[61rem] h-[22rem]'>
             <div className='flex flex-row'>
                 <div className='bg-green-200 w-[32%] h-[21rem] border rounded-md shadow-md p-2'>
-                    <span className='text-2xl'>Content</span>
-                    <div>
-                        {nodes.map((item: any) => {
-                            return (
-                                <div className='overflow-scroll'>
-                                    <NodeContainer key={item.id}>
-                                        <NodeName name={item.name} />
-                                    </NodeContainer>
-                                    <NodeSpacer />
-                                </div>
-                            )
-                        })}
+                    <div className='flex flex-row'>
+                        <span className='text-2xl'>Sources</span>
+                        <NodeSpacer />
+                        <button 
+                            className='w-4 h-4 bg-red-200 p-4 border-transparent rounded-full hover:bg-red-100 active:bg-green-100'
+                            onClick={() => setOpen(!open)}>
+                        </button>
                     </div>
+                    {open == false ? 
+                    (
+                        <div>
+                            {nodes.map((item: any) => {
+                                return (
+                                    <div className='overflow-scroll'>
+                                        <NodeContainer key={item.id}>
+                                            <NodeName name={item.name} />
+                                        </NodeContainer>
+                                        <NodeSpacer />
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    ) : 
+                    (
+                        <CreateNode />
+                    )}
+                    
                 </div>
                 <div className='p-1' />
                 <div className='bg-green-200 w-[33%] h-[21rem] border rounded-md shadow-md p-2'>
