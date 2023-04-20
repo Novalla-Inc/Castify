@@ -1,4 +1,5 @@
 import CLIENT from '../../client';
+import { getItem } from '../../ts/storage';
 import { ChatNode, CameraNode, TextNode } from './Nodes/Nodes';
 import { useEffect, useState } from 'react';
  
@@ -10,9 +11,8 @@ function SceneRender() {
         // Get data from the local file where it is saved
         // once every 5 seconds.
         setTimeout(() => {
-            CLIENT.query(['sceneGetAllNodes', 'Test']).then((res: any) => {
-                setNodes(res);
-            });
+            let data = JSON.parse(getItem("Nodes")!);   
+            setNodes(data);
         }, 5000);
         
         // On return print the data from the local file.

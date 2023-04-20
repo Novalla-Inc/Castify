@@ -22,6 +22,15 @@ pub struct ProjectData {
 	pub scene_data: scene::SceneData,
 }
 
+/// Write the data files as File streams.
+fn data_file(file_path: String, err_msg: &str) -> std::fs::File {
+	return std::fs::OpenOptions::new()
+		.write(true)
+		.create(true)
+		.open(file_path)
+		.expect(err_msg);
+}
+
 /// Create the project directory and the specific .yml files for the project.
 /// This creates the scene data and the config data.
 pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), serde_yaml::Error> {
@@ -46,12 +55,9 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 		let project_file = format!("{}/{}.yml", project_dir, projectname);
 
 		// create the file
-		let original_config = std::fs::OpenOptions::new()
-			.write(true)
-			.create(true)
-			.open(project_file)
-			.expect("could not create file.");
+		let original_config = data_file(project_file, "Cannot Create File");
 
+		// Data for the `config.yml`
 		let _data_project_name = data.project_name.clone();
 		let config_data: SaveData = SaveData {
 			project_name: _data_project_name,
@@ -111,20 +117,12 @@ pub fn save_config_file(data: SaveData, filename: String) -> Result<(), serde_ya
 	if std::fs::metadata(_path.clone()).is_ok() {
 		std::fs::remove_file(_path.clone()).expect("could not delete!");
 
-		let new_config = std::fs::OpenOptions::new()
-			.write(true)
-			.create(true)
-			.open(_path)
-			.expect("could not create file.");
+		let new_config = data_file(_path, "Error Creating File.");
 
 		serde_yaml::to_writer(new_config, &data).unwrap();
 	// if it is not there, create it
 	} else {
-		let original_config = std::fs::OpenOptions::new()
-			.write(true)
-			.create(true)
-			.open(_path)
-			.expect("could not create file.");
+		let original_config = data_file(_path, "Error Creating File.");
 
 		let new_data: SaveData = SaveData {
 			project_name: data.project_name,

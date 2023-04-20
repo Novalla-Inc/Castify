@@ -1,5 +1,4 @@
 import CLIENT from '../../client';
-import { ProjectData, SceneType } from '../../types/data';
 
 type DataProps = {
 	project_name: string;
@@ -10,11 +9,11 @@ type DataProps = {
 
 function CreateProjectBtn({ ...props }: DataProps) {
 	const handleClick = () => {
-		const data: ProjectData = {
+		const data = {
 			project_name: props.project_name,
 			scene_data: {
 				scene_name: props.scene_name,
-				scene_type: SceneType.Preview,
+				scene_type: "PREIVEW",
 				scene_settings: {
 					recording: false,
 				},

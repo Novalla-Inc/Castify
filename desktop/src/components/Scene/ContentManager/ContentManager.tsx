@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import CLIENT from "../../../client";
 import CreateNode from "../Nodes/CreateNode";
+import { getItem } from "../../../ts/storage";
 
 type CManagerProps = {
     projectName?: string;
@@ -101,9 +102,8 @@ function ContentManager({ ...props }: CManagerProps) {
     // get all of the nodes.
     useEffect(() => {
         setTimeout(() => {  
-            CLIENT.query(["sceneGetAllNodes", props.projectName!]).then((res) => {
-                setNodes(res);
-            });
+            let data = JSON.parse(getItem("Nodes")!);
+            setNodes(data); 
         }, 8000);
         
         return () => {
