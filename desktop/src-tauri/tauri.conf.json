@@ -26,7 +26,7 @@
 		"macOSPrivateApi": true,
 		"bundle": {
 			"active": true,
-			"icon": ["./icons/speak-icon.icns"],
+			"icon": ["./icons/castify-icon.icns"],
 			"identifier": "com.mumble.dev",
 			"targets": "all"
 		},
