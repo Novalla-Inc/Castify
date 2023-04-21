@@ -7,7 +7,7 @@
 		"withGlobalTauri": false
 	},
 	"package": {
-		"productName": "speak-streaming-app",
+		"productName": "castify-streaming-app",
 		"version": "1.0.0"
 	},
 	"tauri": {
@@ -27,7 +27,7 @@
 		"bundle": {
 			"active": true,
 			"icon": ["./icons/castify-icon.icns"],
-			"identifier": "com.mumble.dev",
+			"identifier": "com.novalla.dev",
 			"targets": "all"
 		},
 		"security": {
@@ -45,7 +45,7 @@
 				"focus": false,
 				"transparent": true,
 				"decorations": true,
-				"title": "Speak",
+				"title": "Castify",
 				"minHeight": 600,
 				"height": 900,
 				"minWidth": 800,
