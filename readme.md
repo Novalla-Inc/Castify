@@ -1,4 +1,4 @@
-# Speak Streaming app
+# Castify Streaming App
 
 ![Logo copy](https://user-images.githubusercontent.com/67658523/233688026-8457e5a6-1c4c-4da4-bbd2-af496b35779b.png)
 
