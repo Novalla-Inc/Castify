@@ -1,4 +1,4 @@
-# Speak Streaming app
+# Castify
 
 ![Castify (1) 1](https://user-images.githubusercontent.com/67658523/233520192-7da129b5-88fa-46ac-bbc9-42e50f8bac3e.svg)
 
