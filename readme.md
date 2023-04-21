@@ -2,7 +2,8 @@
 
 > "Effortlessly broadcast your message with Castify."
 
-![Logo (1)](https://user-images.githubusercontent.com/67658523/233525163-fa4e6d28-6f3f-4d2f-be7d-68666209a5cb.jpg)
+
+![Logo (3)](https://user-images.githubusercontent.com/67658523/233525276-0fad3bc2-d87f-4147-b37e-13c123484cf2.jpg)
 
 
 
