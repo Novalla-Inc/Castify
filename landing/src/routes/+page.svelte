@@ -1,7 +1,2 @@
-<h1>Home Page</h1>
+<h1 class="text-6xl">Home Page</h1>
 
-<style lang="postcss">
-    /* :global(html) {
-        background-color: theme(colors.green.200);
-    } */
-</style>
