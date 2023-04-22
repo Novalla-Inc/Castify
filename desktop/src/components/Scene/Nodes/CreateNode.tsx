@@ -60,7 +60,7 @@ function CreateNode() {
     };
 
     return ( 
-        <div className='relative top-1 z-10 w-[18rem] h-[18rem] border-transparent rounded-md bg-[#6175789E] p-2 overflow-scroll scrollbar'>
+        <div className='relative top-1 z-10 w-[18rem] h-[18rem] border-transparent rounded-md bg-[#6175789E] p-2 overflow-y-scroll scrollbar'>
             <Heading>Scene Nodes</Heading>
             <div className='flex flex-row'>
                 {/* TODO: Create Nodes */}

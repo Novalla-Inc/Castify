@@ -3,6 +3,8 @@ import CLIENT from "../../../client";
 import CreateNode from "../Nodes/CreateNode";
 import { getItem } from "../../../ts/storage";
 
+import './manager.scss';
+
 type CManagerProps = {
     projectName?: string;
     nodeData?: any;
@@ -112,9 +114,9 @@ function ContentManager({ ...props }: CManagerProps) {
     }, [nodes, 0]);
 
     return (
-        <div className='fixed bottom-[1rem] left-[11rem] border border-white rounded-md p-2 shadow-md w-[61rem] h-[22rem]'>
+        <div className='fixed bottom-[1rem] left-[11rem] border border-white rounded-md p-2 shadow-md w-[61rem] h-[22rem] overflow-hidden manager'>
             <div className='flex flex-row'>
-                <div className='bg-green-200 w-[32%] h-[21rem] border rounded-md shadow-md p-2'>
+                <div className='bg-green-200 w-[32%] h-[21rem] border rounded-md shadow-md p-2 overflow-y-scroll'>
                     <div className='flex flex-row'>
                         <span className='text-2xl'>Sources</span>
                         <NodeSpacer />
@@ -125,10 +127,10 @@ function ContentManager({ ...props }: CManagerProps) {
                     </div>
                     {open == false ? 
                     (
-                        <div>
+                        <div className='p-1'>
                             {nodes.map((item: any) => {
                                 return (
-                                    <div className='overflow-scroll'>
+                                    <div>
                                         <NodeContainer key={item.id}>
                                             <NodeName name={item.name} />
                                         </NodeContainer>

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 /** Render of the core scene, this will hold nodes that the user will add / remove from the node template data. */
 function SceneRender() {
     const [nodes, setNodes]: any = useState([]);
+    const [items, setItems] = useState(0);
 
     useEffect(() => {
         // Get data from the local file where it is saved
@@ -26,7 +27,8 @@ function SceneRender() {
             <div className='grid grid-flow-col grid-cols-4 grid-rows-2 gap-20 max-w-[58rem] max-h-[28rem]'>
                 {nodes.map((node: any) => {
                     return (
-                        <div key={node.id} className=''>
+                        <div key={node.id} className='z-10'>
+                            {/* TODO: Check for max number of items in a snene. */}
                             {node.node_type === 'CHAT' && <ChatNode name={node.name} />}
                             {node.node_type === 'TEXT' && <TextNode text={node.name} />}
                             {node.node_type === 'CAMERA' && <CameraNode name={node.name} />}
