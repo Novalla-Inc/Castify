@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 /** Render of the core scene, this will hold nodes that the user will add / remove from the node template data. */
 function SceneRender() {
     const [nodes, setNodes]: any = useState([]);
-    const [items, setItems] = useState(0);
+    const [items, setItems] = useState(0); // Current max with the size is 10.
 
     useEffect(() => {
         // Get data from the local file where it is saved
@@ -20,10 +20,21 @@ function SceneRender() {
         return () => {
             console.log(nodes);
         };
-     }, [nodes, 0]);
+     }, [nodes, 0]);    
+    
+     const onDragStart = () => {};
+
+     const onDrag = () => {};
+
+     const onDragEnd = () => {};
 
     return (
-        <div className='w-[61rem] h-[30rem] flex flex-col align-middle text-left border border-green-300 p-2 rounded-md shadow-md'>
+        <div 
+            className='w-[61rem] h-[30rem] flex flex-col align-middle text-left border border-green-300 p-2 rounded-md shadow-md'
+            onDrag={onDrag}
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+        >
             <div className='grid grid-flow-col grid-cols-4 grid-rows-2 gap-20 max-w-[58rem] max-h-[28rem]'>
                 {nodes.map((node: any) => {
                     return (
