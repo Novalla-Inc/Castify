@@ -31,6 +31,13 @@ fn data_file(file_path: String, err_msg: &str) -> std::fs::File {
 		.expect(err_msg);
 }
 
+/// Return the project directory.
+fn build_project_path(project_name: String) -> String {
+	let cwd = std::env::current_dir().unwrap();
+
+	return format!("{}/projects/{}", cwd.to_string_lossy(), project_name);
+}
+
 /// Create the project directory and the specific .yml files for the project.
 /// This creates the scene data and the config data.
 pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), serde_yaml::Error> {
@@ -52,7 +59,11 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 		std::fs::create_dir(project_dir.clone()).expect("could not create directory");
 
 		// create the file path
-		let project_file = format!("{}/{}.yml", project_dir, projectname);
+		let project_file = format!(
+			"{}/{}.yml",
+			build_project_path(projectname.clone()),
+			projectname.clone()
+		);
 
 		// create the file
 		let original_config = data_file(project_file, "Cannot Create File");
@@ -81,7 +92,7 @@ pub fn save_project_data(data: ProjectData, projectname: String) -> Result<(), s
 
 /// Create the other folders for the project
 fn create_project_structure(project_path: String) {
-	// create new directorie paths.
+	// create new directories path.
 	let _create_video_path = format!("{}/{}", project_path, "videos");
 	let _create_audio_path = format!("{}/{}", project_path, "audio");
 	let _create_images_path = format!("{}/{}", project_path, "images");
@@ -112,7 +123,8 @@ pub fn save_config_file(data: SaveData, filename: String) -> Result<(), serde_ya
 		filename
 	);
 
-	println!("path: {}", _path);
+	// FEAT: Add Debug
+	// println!("path: {}", _path);
 
 	if std::fs::metadata(_path.clone()).is_ok() {
 		std::fs::remove_file(_path.clone()).expect("could not delete!");
@@ -120,7 +132,6 @@ pub fn save_config_file(data: SaveData, filename: String) -> Result<(), serde_ya
 		let new_config = data_file(_path, "Error Creating File.");
 
 		serde_yaml::to_writer(new_config, &data).unwrap();
-	// if it is not there, create it
 	} else {
 		let original_config = data_file(_path, "Error Creating File.");
 

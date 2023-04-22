@@ -26,6 +26,7 @@ pub struct Node {
 	pub position: Position,
 }
 
+/// Create a node inside of some current scene.
 pub fn create_node(
 	new_node: Node,
 	mut current_nodes: Vec<Node>,
@@ -74,7 +75,7 @@ pub fn get_all_nodes(project_path: String) -> Vec<Node> {
 
 	let scene_data: ProjectData = serde_yaml::from_reader(file).unwrap();
 
-	println!("{:?}", scene_data.clone());
+	// println!("{:?}", scene_data.clone());
 
 	for node in scene_data.scene_data.scene_nodes {
 		_node_vec.push(node);
