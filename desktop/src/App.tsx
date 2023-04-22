@@ -1,4 +1,3 @@
-import ContentDrawer from './components/ContentDrawer/ContentDrawer';
 import SideNav from './components/Nav/SideNav';
 import OpenProjectBtn from './components/Project/OpenProjectBtn';
 
@@ -12,7 +11,6 @@ export default function App() {
 				</div>
 			</div>
 			<SideNav />
-			{/* <ContentDrawer /> */}
 		</div>
 	);
 }
