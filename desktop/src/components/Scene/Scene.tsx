@@ -23,14 +23,14 @@ function SceneRender() {
 
     return (
         <div className='w-[61rem] h-[30rem] flex flex-col align-middle text-left border border-green-300 p-2 rounded-md shadow-md'>
-            <div className=''>
+            <div className='grid grid-flow-col grid-cols-4 grid-rows-2 gap-20 max-w-[58rem] max-h-[28rem]'>
                 {nodes.map((node: any) => {
                     return (
-                    <div key={node.id}>
-                        {node.node_type === 'CHAT' && <ChatNode name={node.name} />}
-                        {node.node_type === 'TEXT' && <TextNode text={node.name} />}
-                        {node.node_type === 'CAMERA' && <CameraNode name={node.name} />}
-                    </div>
+                        <div key={node.id} className=''>
+                            {node.node_type === 'CHAT' && <ChatNode name={node.name} />}
+                            {node.node_type === 'TEXT' && <TextNode text={node.name} />}
+                            {node.node_type === 'CAMERA' && <CameraNode name={node.name} />}
+                        </div>
                     )
                 })}
             </div>
