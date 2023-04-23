@@ -3,5 +3,3 @@ pub mod data;
 pub mod plugins;
 pub mod router;
 pub mod util;
-// TODO: Fix router.
-// pub mod core_logger;
