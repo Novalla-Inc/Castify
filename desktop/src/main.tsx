@@ -12,12 +12,12 @@ const coreRouter = createBrowserRouter([
 	{
 		path: '/',
 		element: <App />,
-		errorElement: <PageLoad />,
+		errorElement: <PageLoad />
 	},
 	{
 		path: '/layout',
-		element: <SceneLayout />,
-	},
+		element: <SceneLayout />
+	}
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

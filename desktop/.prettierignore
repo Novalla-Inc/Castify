@@ -1,3 +1,8 @@
-./src/images
-/public
+#images and depenedencies
 /node_modules
+/public
+/src/images
+
+# Configuration files
+tailwind.config.js
+postcss.config.js
