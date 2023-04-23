@@ -3,7 +3,6 @@ use serde_yaml;
 
 use super::scene;
 use crate::crypto::encrypt::create_hash_value;
-use crate::data::node::{Node, NodeType};
 use crate::util::stream::generate_stream_key;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -158,6 +157,8 @@ mod tests {
 
 	#[test]
 	fn test_save_project_data() {
+		use crate::data::node::{Node, NodeType};
+		
 		let new_node: Node = Node {
 			id: uuid::Uuid::new_v4(),
 			name: "test".to_string(),
