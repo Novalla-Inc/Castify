@@ -1,5 +1,6 @@
 import CLIENT from '../../client';
 import { getItem } from '../../ts/storage';
+import Hover from '../General/Hover';
 import { ChatNode, CameraNode, TextNode } from './Nodes/Nodes';
 import { useEffect, useState } from 'react';
  
@@ -56,7 +57,9 @@ function SceneRender() {
 function SceneView() {
     return (
         <div className='w-full h-full'>
-            <SceneRender />
+            <Hover text='This is the scene, you can add nodes to it.'>
+                <SceneRender />
+            </Hover>
         </div>
     )
 }
