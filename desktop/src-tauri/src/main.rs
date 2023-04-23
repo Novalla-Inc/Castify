@@ -3,6 +3,13 @@
 
 use speak::router::router::router;
 
+#[tauri::command]
+fn create_window(app: tauri::AppHandle) {
+    let window = tauri::WindowBuilder::new(&app, "label", tauri::WindowUrl::External("https://tauri.app/".parse().unwrap()))
+        .build()
+        .unwrap();
+}
+
 #[tokio::main]
 async fn main() {
     tauri::Builder::default()
