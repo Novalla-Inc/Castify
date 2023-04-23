@@ -22,11 +22,11 @@ function SceneRender() {
         };
      }, [nodes, 0]);    
     
-     const onDragStart = () => {};
+     const onDragStart = (e: any) => {};
 
-     const onDrag = () => {};
+     const onDrag = (e: any) => {   };
 
-     const onDragEnd = () => {};
+     const onDragEnd = (e: any) => {};
 
     return (
         <div 
@@ -34,6 +34,7 @@ function SceneRender() {
             onDrag={onDrag}
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
+            draggable
         >
             <div className='grid grid-flow-col grid-cols-4 grid-rows-2 gap-20 max-w-[58rem] max-h-[28rem]'>
                 {nodes.map((node: any) => {

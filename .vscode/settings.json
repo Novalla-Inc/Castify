@@ -1,3 +1,5 @@
 {
-	"rust-analyzer.showUnlinkedFileNotification": false
+	"typescript.tsdk": "./node_modules/typescript/lib",
+	"i18n-ally.localesPaths": "desktop/src/i18n",
+	"i18n-ally.keystyle": "nested",
 }
