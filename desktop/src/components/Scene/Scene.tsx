@@ -1,7 +1,7 @@
 import CLIENT from '../../client';
 import { getItem } from '../../ts/storage';
 import Hover from '../General/Hover';
-import { ChatNode, CameraNode, TextNode } from './Nodes/Nodes';
+import { ChatNode, CameraNode, TextNode } from './Nodes/NodeTemplates';
 import { useEffect, useState } from 'react';
  
 /** Render of the core scene, this will hold nodes that the user will add / remove from the node template data. */
