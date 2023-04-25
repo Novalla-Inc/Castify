@@ -894,6 +894,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "coreaudio-sys"
+version = "0.2.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f034b2258e6c4ade2f73bf87b21047567fb913ee9550837c2316d139b0262b24"
+dependencies = [
+ "bindgen 0.64.0",
+]
+
+[[package]]
 name = "cpufeatures"
 version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5546,6 +5555,7 @@ name = "speak"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "coreaudio-sys",
  "crypto-hash",
  "env_logger",
  "ffmpeg-next",
